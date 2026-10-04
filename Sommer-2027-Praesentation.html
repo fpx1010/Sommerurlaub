@@ -1,0 +1,1144 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unser Sommer 2027 – Urlaubsideen für Fabian &amp; Ana-Maria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#FBF4E8;
+    --sand-deep:#F3E6D0;
+    --ink:#1C3438;
+    --teal:#0E5F67;
+    --teal-deep:#0A454B;
+    --coral:#F2714A;
+    --coral-deep:#D85C38;
+    --turquoise:#2FBFB0;
+    --gold:#E8A93C;
+    --paper:#FFFFFF;
+    --muted:#5B7378;
+    --line:#E3D7C2;
+    --shadow: 0 20px 50px -20px rgba(14,65,72,0.35);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;background:var(--teal-deep);}
+  body{font-family:'Inter',sans-serif;color:var(--ink);overflow:hidden;}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;margin:0;font-weight:600;}
+  p,li,td,th,div{font-family:'Inter',sans-serif;}
+  a{color:inherit;}
+  img{display:block;max-width:100%;}
+
+  #stage{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%, #114A51 0%, #0A2E33 70%);display:flex;align-items:center;justify-content:center;}
+  #frame-wrap{position:relative;}
+  .slide{
+    width:1920px;height:1080px;position:absolute;top:0;left:0;
+    background:var(--sand);
+    display:none;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .slide.active{display:flex;flex-direction:column;}
+
+  /* ---- shared building blocks ---- */
+  .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:20px;font-weight:700;color:var(--coral);}
+  .pagepad{padding:90px 110px;}
+  .footerbar{position:absolute;left:110px;right:110px;bottom:40px;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px;}
+  .chaplabel{font-size:18px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);}
+
+  .badge{display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:var(--sand);padding:10px 22px;border-radius:999px;font-weight:700;font-size:20px;}
+  .badge.coral{background:var(--coral);}
+  .badge.turq{background:var(--turquoise);color:var(--teal-deep);}
+
+  .imgcard{position:relative;border-radius:22px;overflow:hidden;background:#dfe9e8;box-shadow:0 10px 30px -14px rgba(10,50,55,0.4);}
+  .imgcard img{width:100%;height:100%;object-fit:cover;display:block;}
+  .imgcard .fallback{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#CFE6E2,#E9DCC2);color:var(--teal-deep);text-align:center;padding:20px;}
+  .imgcard .fallback b{font-size:22px;font-family:'Fraunces',serif;}
+  .imgcard .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(0deg, rgba(10,40,44,0.82), rgba(10,40,44,0));color:#fff;font-size:20px;font-weight:600;}
+  .imgcard .tag{position:absolute;top:16px;left:16px;background:rgba(255,255,255,0.92);color:var(--teal-deep);font-size:15px;font-weight:700;padding:6px 14px;border-radius:999px;letter-spacing:0.5px;}
+
+  .ratewrap{display:flex;align-items:center;gap:6px;}
+  .dot{width:16px;height:16px;border-radius:50%;background:var(--line);}
+  .dot.on{background:var(--coral);}
+
+  .critcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;}
+  .critcard h4{font-size:24px;color:var(--teal-deep);}
+  .critcard p{font-size:18px;line-height:1.4;color:var(--muted);margin:0;}
+
+  .costcol{background:var(--paper);border-radius:22px;padding:36px 40px;flex:1;display:flex;flex-direction:column;gap:16px;border:1px solid var(--line);}
+  .costcol.dream{background:linear-gradient(165deg,#0E5F67,#0A353A);color:#F2EADA;border:none;}
+  .costcol h3{font-size:30px;}
+  .costcol.dream h3{color:#fff;}
+  .costrow{display:flex;justify-content:space-between;font-size:20px;padding:10px 0;border-bottom:1px dashed var(--line);}
+  .costcol.dream .costrow{border-bottom:1px dashed rgba(255,255,255,0.25);}
+  .costrow span:first-child{color:var(--muted);}
+  .costcol.dream .costrow span:first-child{color:#C9DEDA;}
+  .costtotal{display:flex;justify-content:space-between;font-size:26px;font-weight:800;padding-top:14px;color:var(--teal-deep);}
+  .costcol.dream .costtotal{color:#fff;}
+  .spartipp{background:var(--gold);color:#3A2A08;border-radius:16px;padding:18px 24px;font-size:19px;font-weight:600;display:flex;gap:14px;align-items:flex-start;}
+
+  .pinmap{position:relative;border-radius:22px;background:radial-gradient(circle at 30% 30%, #1A6A72, #0A353A 75%);overflow:hidden;}
+  .pinmap svg{position:absolute;inset:0;width:100%;height:100%;opacity:0.35;}
+  .pinmap .pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;}
+  .pinmap .pin .dotpin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--coral);transform:rotate(-45deg);box-shadow:0 0 0 6px rgba(242,113,74,0.25);}
+  .pinmap .label{position:absolute;color:#fff;font-family:'Fraunces',serif;}
+
+  table.cmp{border-collapse:collapse;width:100%;}
+  table.cmp th,table.cmp td{border:1px solid rgba(255,255,255,0.12);padding:10px 8px;text-align:center;}
+  table.cmp th{background:var(--teal-deep);color:#fff;font-size:17px;}
+  table.cmp td{font-size:17px;color:#EAF2EF;}
+
+  .navbtn{position:fixed;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:50;backdrop-filter:blur(6px);}
+  .navbtn:hover{background:rgba(255,255,255,0.25);}
+  #prevBtn{left:24px;}
+  #nextBtn{right:24px;}
+  #counter{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:#fff;font-size:16px;background:rgba(255,255,255,0.12);padding:8px 18px;border-radius:999px;z-index:50;letter-spacing:1px;}
+  #menuBtn{position:fixed;top:18px;right:24px;z-index:60;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:10px 20px;font-size:15px;cursor:pointer;backdrop-filter:blur(6px);}
+  #menuPanel{position:fixed;top:0;right:0;height:100%;width:360px;background:#0A2E33;color:#EFE6D4;z-index:70;transform:translateX(100%);transition:transform .3s ease;padding:30px;overflow-y:auto;box-shadow:-20px 0 40px rgba(0,0,0,0.3);}
+  #menuPanel.open{transform:translateX(0);}
+  #menuPanel h3{color:#fff;font-size:22px;margin-bottom:18px;}
+  #menuPanel a{display:block;padding:10px 12px;border-radius:10px;color:#CFE3DF;text-decoration:none;font-size:16px;margin-bottom:4px;}
+  #menuPanel a:hover{background:rgba(255,255,255,0.08);color:#fff;}
+  #menuPanel .sep{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#7FA6A1;margin:18px 0 6px;}
+  #closeMenu{position:absolute;top:24px;right:24px;background:none;border:none;color:#fff;font-size:22px;cursor:pointer;}
+</style>
+<script>
+/* Muss vor allen <img onerror> im body definiert sein, sonst schlägt ein sehr frühes Ladefehler-Event fehl. */
+function imgFallback(el){
+  el.style.display='none';
+  var fb = el.parentElement.querySelector('.fallback');
+  if(fb) fb.style.display='flex';
+}
+</script>
+</head>
+<body>
+
+<div id="stage">
+  <div id="frame-wrap">
+    <div id="slides">
+<!-- SLIDES_START -->
+
+<section class="slide" id="cover" data-menu="① Titel" data-chapter="1">
+  <div style="position:absolute;inset:0;">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oia,_Santorini_HDR_sunset.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang in Oia, Santorin" style="width:100%;height:100%;object-fit:cover;">
+    <div class="fallback" style="display:none;position:absolute;inset:0;background:linear-gradient(135deg,#0E5F67,#1C3438);"><b style="color:#fff;font-size:30px;">🌅 Sommer 2027</b></div>
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(8,30,33,0.90) 8%, rgba(8,30,33,0.15) 50%, rgba(8,30,33,0.45) 100%);"></div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:100px 120px;color:#fff;">
+    <div class="eyebrow" style="color:#F2A66B;">Sommerurlaub 2027</div>
+    <h1 style="font-size:104px;color:#fff;max-width:1550px;line-height:1.05;margin-top:18px;">Unser Sommer 2027</h1>
+    <p style="font-size:36px;margin-top:20px;color:#F3EADA;font-weight:500;">Urlaubsideen für Fabian &amp; Ana-Maria</p>
+    <p style="font-size:21px;margin-top:44px;color:#CFE3DF;letter-spacing:1px;">2 WOCHEN&nbsp;&nbsp;·&nbsp;&nbsp;AUGUST / SEPTEMBER 2027&nbsp;&nbsp;·&nbsp;&nbsp;SEMESTERFERIEN</p>
+  </div>
+</section>
+
+<section class="slide" id="intro" data-menu="② Worum geht's">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="eyebrow">Worum geht's</div>
+    <h2 style="font-size:58px;margin-top:14px;color:var(--teal-deep);">Ein Urlaub, acht Ideen – ihr entscheidet</h2>
+    <div style="display:flex;gap:70px;margin-top:50px;flex:1;">
+      <div style="flex:1;display:flex;flex-direction:column;gap:26px;">
+        <div>
+          <h4 style="font-size:24px;color:var(--teal);margin-bottom:8px;">📅 Zeitraum</h4>
+          <p style="font-size:20px;color:var(--muted);line-height:1.5;margin:0;">Ca. 2 Wochen im August/September 2027, passend zu euren Semesterferien – Fabian (t.o. BWL, Stuttgart) und Ana-Maria (Grundschullehramt, Schwäbisch Gmünd).</p>
+        </div>
+        <div>
+          <h4 style="font-size:24px;color:var(--teal);margin-bottom:8px;">🧭 Euer Reisestil</h4>
+          <p style="font-size:20px;color:var(--muted);line-height:1.5;margin:0;">Ihr mögt alles: Strand &amp; Erholung, Abenteuer &amp; Action (Schnorcheln, Tauchen, Wandern, Vulkane), Kultur, Städte &amp; gutes Essen – und ein bisschen Romantik für besondere Zweisamkeits-Momente. Jedes Ziel hier wird genau danach bewertet.</p>
+        </div>
+        <div>
+          <h4 style="font-size:24px;color:var(--teal);margin-bottom:8px;">✈️ Abflug</h4>
+          <p style="font-size:20px;color:var(--muted);line-height:1.5;margin:0;">Immer der günstigste bzw. praktischste Flughafen: Stuttgart, Frankfurt oder München.</p>
+        </div>
+      </div>
+      <div style="flex:1;background:var(--teal-deep);border-radius:26px;padding:44px;color:#fff;display:flex;flex-direction:column;gap:22px;">
+        <h4 style="font-size:26px;color:#fff;">Die Bewertungs-Skala</h4>
+        <p style="font-size:18px;color:#CFE3DF;margin:0;line-height:1.5;">Jedes Ziel wird in 8 Kriterien ehrlich von 1 (schwach) bis 5 (top) bewertet – inklusive Nachteilen, Preisen und Wetter-Realitätscheck.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;font-size:19px;margin-top:6px;">
+          <div>💶 Preis</div><div>🧗 Abenteuer</div>
+          <div>🌄 Aussicht</div><div>🌿 Natur</div>
+          <div>🤝 Menschen &amp; Kultur</div><div>🍽️ Essen</div>
+          <div>✈️ Anreise &amp; Flugzeit</div><div>🌦️ Wetter Aug/Sep</div>
+        </div>
+        <div style="margin-top:auto;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.08);padding:14px 18px;border-radius:14px;">
+          <span style="font-size:18px;">Beispiel-Bewertung:</span>
+          <span class="ratewrap"><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot on"></span><span class="dot"></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Worum geht's</span></div>
+</section>
+
+<section class="slide" id="worldmap" data-menu="③ Weltkarte">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="eyebrow">Auf einen Blick</div>
+    <h2 style="font-size:54px;margin-top:12px;color:var(--teal-deep);">Acht Ziele, eine Weltkarte</h2>
+    <div class="pinmap" style="flex:1;margin-top:34px;background:#0A2E33;" id="worldmap-panel">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Equirectangular_projection_SW.jpg" onerror="imgFallback(this)" alt="Weltkarte" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.85;filter:saturate(0.7) brightness(0.8);">
+      <div class="fallback" style="display:none;background:linear-gradient(160deg,#114A51,#0A2E33);"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(10,46,51,0.55), rgba(10,46,51,0.25));"></div>
+      <div id="world-pins"></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Weltkarte</span></div>
+</section>
+
+<section class="slide" id="cruise-overview" data-menu="④ Kreuzfahrt – Übersicht" data-chapter="1">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 1 · Kreuzfahrt</div>
+    <h2 style="font-size:54px;margin-top:10px;color:var(--teal-deep);">Drei Kreuzfahrt-Welten im Vergleich</h2>
+    <p style="font-size:20px;color:var(--muted);max-width:1500px;margin-top:10px;">Gleiches Prinzip (Schiff, feste Häfen, alles organisiert), aber völlig unterschiedlicher Charakter – und sehr unterschiedliche Preise.</p>
+    <div style="margin-top:28px;background:var(--teal-deep);border-radius:24px;padding:36px 42px;flex:1;" id="cruise-compare-mount"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Kreuzfahrt · Übersicht</span></div>
+</section>
+
+
+<section class="slide" id="med-intro" data-menu="Mittelmeer · Übersicht">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 1 · Kreuzfahrt — Mittelmeer</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Antike Inselwelt &amp; die kürzeste Anreise von allen</h2>
+    <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:40%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nea_Kameni_and_the_Caldera_of_Santorini.jpg" onerror="imgFallback(this)" alt="Caldera von Santorin">
+        <div class="fallback"><b>🌋 Caldera von Santorin</b></div>
+        <div class="cap">Die Caldera von Santorin – Startpunkt eurer Route</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+        <p style="font-size:21px;color:var(--ink);line-height:1.5;margin:0;background:var(--sand-deep);padding:18px 22px;border-radius:16px;">Kürzeste Anreise aller drei Kreuzfahrt-Varianten, antike Geschichte, Inselromantik und ein echtes Vulkan-Erlebnis auf Santorin – deckt fast eure ganze Wunschliste auf engstem Raum ab.</p>
+        <div class="pinmap" style="flex:1;" id="med-pin"></div>
+      </div>
+    </div>
+    <div style="margin-top:26px;">
+      <h4 style="font-size:20px;color:var(--teal);margin-bottom:12px;">Route: 11 Nächte ab/bis Venedig (z. B. MSC, Costa, TUI Cruises)</h4>
+      <div class="pinmap" style="height:220px;" id="med-route"></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Mittelmeer · Übersicht &amp; Anreise</span></div>
+</section>
+
+<section class="slide" id="med-highlights" data-menu="Mittelmeer · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Mittelmeer</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights an Bord &amp; an Land</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Black_beach_in_Kamari_Santorini.jpg" onerror="imgFallback(this)" alt="Schwarzer Strand Kamari"><div class="fallback"><b>🏖️ Kamari Beach</b></div><div class="tag">Strand</div><div class="cap">Schwarzer Lavastrand von Kamari, Santorin</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nea_Kameni_and_the_Caldera_of_Santorini.jpg" onerror="imgFallback(this)" alt="Vulkanwanderung Nea Kameni"><div class="fallback"><b>🌋 Nea Kameni</b></div><div class="tag">Abenteuer</div><div class="cap">Vulkanwanderung &amp; heiße Quellen, Nea Kameni</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Celsus_Library_in_Ephesus,_Turkey.jpg" onerror="imgFallback(this)" alt="Celsus-Bibliothek Ephesus"><div class="fallback"><b>🏛️ Ephesus</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Celsus-Bibliothek, Ephesus + türkisches Street Food</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oia,_Santorini_HDR_sunset.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang Oia"><div class="fallback"><b>🌅 Oia Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang in Oia – Postkarten-Panorama</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/City_Walls,_Dubrovnik,_July_2011_(01).jpg" onerror="imgFallback(this)" alt="Stadtmauer Dubrovnik"><div class="fallback"><b>🏰 Dubrovnik</b></div><div class="tag">Kultur</div><div class="cap">2 km Spaziergang auf der Stadtmauer, Dubrovnik</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parthenon_on_Acropolis_in_Athens.jpg" onerror="imgFallback(this)" alt="Akropolis Athen"><div class="fallback"><b>🏛️ Akropolis</b></div><div class="tag">Kultur</div><div class="cap">Parthenon auf der Akropolis, Athen</div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Mittelmeer · Highlights</span></div>
+</section>
+
+<section class="slide" id="med-crit-cost" data-menu="Mittelmeer · Kriterien &amp; Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Mittelmeer</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:18px;color:var(--teal-deep);">Ehrliche Bewertung &amp; Preise</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:14px;" id="crit-med-cruise"></div>
+    <div style="margin-top:20px;" id="cost-med-cruise"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Mittelmeer · Kriterien &amp; Preise</span></div>
+</section>
+
+
+<section class="slide" id="carib-intro" data-menu="Karibik · Übersicht">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 1 · Kreuzfahrt — Karibik</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Postkarten-Karibik – mitten in der Hurrikansaison</h2>
+    <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:40%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Carnival_Glory,_Half_Moon_Cay,_Bahamas_(5728106364).jpg" onerror="imgFallback(this)" alt="Half Moon Cay">
+        <div class="fallback"><b>🏝️ Half Moon Cay</b></div>
+        <div class="cap">Half Moon Cay, Bahamas – die private Trauminsel-Station</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+        <p style="font-size:21px;color:var(--ink);line-height:1.5;margin:0;background:var(--sand-deep);padding:18px 22px;border-radius:16px;">Klassische "Postkarten-Karibik" mit Schnorcheln und türkisem Wasser – aber die Reisezeit fällt direkt in die Atlantik-Hurrikansaison, dazu solltet ihr ehrlich stehen (mehr dazu bei Wetter).</p>
+        <div class="pinmap" style="flex:1;" id="carib-pin"></div>
+      </div>
+    </div>
+    <div style="margin-top:26px;">
+      <h4 style="font-size:20px;color:var(--teal);margin-bottom:12px;">Route: 10–11 Nächte ab/bis Fort Lauderdale (z. B. Royal Caribbean, MSC, Carnival)</h4>
+      <div class="pinmap" style="height:220px;" id="carib-route"></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Karibik · Übersicht &amp; Anreise</span></div>
+</section>
+
+<section class="slide" id="carib-highlights" data-menu="Karibik · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Karibik</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights an Bord &amp; an Land</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Carnival_Glory,_Half_Moon_Cay,_Bahamas_(5728106364).jpg" onerror="imgFallback(this)" alt="Half Moon Cay Strand"><div class="fallback"><b>🏖️ Half Moon Cay</b></div><div class="tag">Strand</div><div class="cap">Puderweißer Strand, Half Moon Cay (Bahamas)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dunn's_River_Falls,_Ocho_Rios,_Jamaica.jpg" onerror="imgFallback(this)" alt="Dunn's River Falls"><div class="fallback"><b>💦 Dunn's River Falls</b></div><div class="tag">Abenteuer</div><div class="cap">Wasserfall-Klettern, Dunn's River Falls (Jamaika)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Southern_stingrays_at_stingray_city.jpg" onerror="imgFallback(this)" alt="Stingray City"><div class="fallback"><b>🐠 Stingray City</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln mit Stachelrochen, Grand Cayman</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tulum_mayan_ruins_(34070992724).jpg" onerror="imgFallback(this)" alt="Tulum Maya-Ruinen"><div class="fallback"><b>🏛️ Tulum</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Maya-Ruinen von Tulum + mexikanisches Street Food</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ship_and_sunset,_a_perfect_combination.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang an Deck"><div class="fallback"><b>🌅 Deck-Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang an Deck zwischen den Häfen</div></div>
+      <div class="imgcard" style="background:linear-gradient(135deg,#0E5F67,#1C3438);display:flex;align-items:center;justify-content:center;padding:28px;"><div style="color:#fff;"><b style="font-size:22px;font-family:'Fraunces',serif;">⚠️ Wichtig für Aug/Sep</b><p style="font-size:17px;margin-top:10px;line-height:1.45;color:#CFE3DF;">Statistisches Hurrikan-Maximum: 10. September. Reiseversicherung mit Sturmschutz einplanen (siehe nächste Folie).</p></div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Karibik · Highlights</span></div>
+</section>
+
+<section class="slide" id="carib-crit-cost" data-menu="Karibik · Kriterien &amp; Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Karibik</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:18px;color:var(--teal-deep);">Ehrliche Bewertung &amp; Preise</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:14px;" id="crit-carib-cruise"></div>
+    <div style="margin-top:20px;" id="cost-carib-cruise"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Karibik · Kriterien &amp; Preise</span></div>
+</section>
+
+<section class="slide" id="hawaiicruise-intro" data-menu="Hawaii-Kreuzfahrt · Übersicht">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 1 · Kreuzfahrt — Hawaii</div>
+    <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Die abenteuerlichste, aber weiteste Variante</h2>
+    <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:40%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Haleakala_crater.jpg" onerror="imgFallback(this)" alt="Haleakala Krater">
+        <div class="fallback"><b>🌋 Haleakalā</b></div>
+        <div class="cap">Haleakalā-Krater, Maui</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+        <p style="font-size:20px;color:var(--ink);line-height:1.45;margin:0;background:var(--sand-deep);padding:16px 22px;border-radius:16px;">Aktiver Vulkan, Wandern, Top-Schnorcheln – trifft euren "Abenteuer + Vulkane"-Wunsch am direktesten. Nur 7 Nächte Schiff, daher kombiniert mit ca. 7 Hotelnächten auf den Inseln ("Fly &amp; Cruise &amp; Stay").</p>
+        <div class="pinmap" style="flex:1;" id="hawaiicruise-pin"></div>
+      </div>
+    </div>
+    <div style="margin-top:26px;">
+      <h4 style="font-size:20px;color:var(--teal);margin-bottom:12px;">Route: 7 Nächte ab/bis Honolulu (NCL "Pride of America" – einziges reines Hawaii-Inselhopping-Schiff)</h4>
+      <div class="pinmap" style="height:220px;" id="hawaiicruise-route"></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii-Kreuzfahrt · Übersicht &amp; Anreise</span></div>
+</section>
+
+<section class="slide" id="hawaiicruise-highlights" data-menu="Hawaii-Kreuzfahrt · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Hawaii</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights an Bord &amp; an Land</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_beach,_Honolulu.jpg" onerror="imgFallback(this)" alt="Waikiki Beach"><div class="fallback"><b>🏖️ Waikiki</b></div><div class="tag">Strand</div><div class="cap">Waikiki Beach, Honolulu</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Haleakala_crater.jpg" onerror="imgFallback(this)" alt="Haleakala Krater"><div class="fallback"><b>🌋 Haleakalā</b></div><div class="tag">Abenteuer</div><div class="cap">Vulkankrater Haleakalā / Kīlauea</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hanauma_Bay_(15551370811).jpg" onerror="imgFallback(this)" alt="Hanauma Bay"><div class="fallback"><b>🐠 Hanauma Bay</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln in der Hanauma Bay, Oahu</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hanawi_Falls_Maui_Hawaii_Road_to_Hana_(31869441038).jpg" onerror="imgFallback(this)" alt="Road to Hana Wasserfall"><div class="fallback"><b>💦 Road to Hana</b></div><div class="tag">Natur</div><div class="cap">Wasserfälle an der Road to Hana, Maui</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Na_Pali_coast_Kauai_2.jpg" onerror="imgFallback(this)" alt="Na Pali Coast"><div class="fallback"><b>🏔️ Nā Pali</b></div><div class="tag">Aussicht</div><div class="cap">Nā Pali Coast, Kauai</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_Beach_at_Sunset.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang Waikiki"><div class="fallback"><b>🌅 Waikiki Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang am Waikiki Beach</div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii-Kreuzfahrt · Highlights</span></div>
+</section>
+
+<section class="slide" id="hawaiicruise-crit-cost" data-menu="Hawaii-Kreuzfahrt · Kriterien &amp; Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Hawaii</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:18px;color:var(--teal-deep);">Ehrliche Bewertung &amp; Preise</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:14px;" id="crit-hawaii-cruise"></div>
+    <div style="margin-top:20px;" id="cost-hawaii-cruise"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii-Kreuzfahrt · Kriterien &amp; Preise</span></div>
+</section>
+
+
+<section class="slide" id="maldives-intro" data-menu="⑤ Malediven · Übersicht" data-chapter="1">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 2 · Malediven</div>
+    <h2 style="font-size:50px;margin-top:8px;color:var(--teal-deep);">Türkises Wasser, pure Erholung, null Vulkane</h2>
+    <div style="display:flex;gap:40px;margin-top:24px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:45%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach_Scene_-_Maafushi_Island_-_South_Male_Atoll_-_Maldives_-_01_(14272892886).jpg" onerror="imgFallback(this)" alt="Maafushi Island">
+        <div class="fallback"><b>🏝️ Maafushi Island</b></div>
+        <div class="cap">Maafushi – lokale Insel im Südmalé-Atoll</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+        <p style="font-size:22px;color:var(--ink);line-height:1.5;margin:0;background:var(--sand-deep);padding:20px 24px;border-radius:16px;">Die Malediven vereinen auf kleinstem Raum, was ihr sucht: puderweiße Strände, Weltklasse-Schnorcheln direkt vorm Bungalow und jede Menge Romantik – nur "Wandern &amp; Vulkane" fällt hier komplett weg, die Inseln sind flache Koralleninseln.</p>
+        <div class="pinmap" style="flex:1;" id="maldives-pin"></div>
+      </div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Malediven · Übersicht &amp; Anreise</span></div>
+</section>
+
+<section class="slide" id="maldives-highlights" data-menu="Malediven · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Malediven</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights im Atoll</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach_Scene_-_Maafushi_Island_-_South_Male_Atoll_-_Maldives_-_01_(14272892886).jpg" onerror="imgFallback(this)" alt="Maafushi Strand"><div class="fallback"><b>🏖️ Maafushi</b></div><div class="tag">Strand</div><div class="cap">Bikini-Strand &amp; Gästehäuser, Maafushi</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Maldives_manta_ray.jpg" onerror="imgFallback(this)" alt="Mantarochen Hanifaru Bay"><div class="fallback"><b>🐋 Hanifaru Bay</b></div><div class="tag">Abenteuer</div><div class="cap">Mantarochen-Schwärme, Hanifaru Bay (Aug–Okt Top-Saison!)</div></div>
+      <div class="imgcard" style="background:linear-gradient(135deg,#2FBFB0,#0E5F67);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">🤿</div><b style="font-size:20px;font-family:'Fraunces',serif;">Banana Reef</b><p style="font-size:15px;margin-top:8px;color:#E3F3F0;">Einer der berühmtesten Tauch-/Schnorchelspots der Malediven, Nordmalé-Atoll</p></div></div>
+      <div class="imgcard" style="background:linear-gradient(135deg,#F2A66B,#D85C38);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">🧺</div><b style="font-size:20px;font-family:'Fraunces',serif;">Sandbank-Picknick</b><p style="font-size:15px;margin-top:8px;color:#FCEBDD;">Romantisches Picknick auf einer unbewohnten Sandbank, kombiniert mit Schnorcheln</p></div></div>
+      <div class="imgcard" style="background:linear-gradient(135deg,#0A454B,#1C3438);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">🍽️</div><b style="font-size:20px;font-family:'Fraunces',serif;">Ithaa Undersea Restaurant</b><p style="font-size:15px;margin-top:8px;color:#CFE3DF;">Weltweit erstes Unterwasser-Restaurant, 5 m unter der Oberfläche (Conrad Maldives)</p></div></div>
+      <div class="imgcard" src-note style="background:linear-gradient(135deg,#1C3438,#0E5F67);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">🌅</div><b style="font-size:20px;font-family:'Fraunces',serif;">Sunset-Delfintour</b><p style="font-size:15px;margin-top:8px;color:#CFE3DF;">Abendliche Bootstour mit Delfinbeobachtung – klassischer Paar-Moment</p></div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Malediven · Highlights</span></div>
+</section>
+
+<section class="slide" id="maldives-crit" data-menu="Malediven · Kriterien">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Malediven</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Ehrliche Bewertung</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1;" id="crit-maldives"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Malediven · Kriterien</span></div>
+</section>
+
+<section class="slide" id="maldives-cost" data-menu="Malediven · Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Malediven</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Preise für 2 Wochen (Schätzung 2027, p. P.)</h2>
+    <div style="display:flex;gap:30px;flex:1;">
+      <div class="costcol"><h3>🎒 Studentenbudget</h3><p style="font-size:16px;color:var(--muted);margin:-8px 0 0;">Gästehaus auf lokaler Insel (z. B. Maafushi)</p><div id="cost-budget-maldives"></div></div>
+      <div class="costcol dream"><h3>💎 Traumvariante</h3><p style="font-size:16px;color:#C9DEDA;margin:-8px 0 0;">Wasservilla im Resort, All-Inclusive</p><div id="cost-dream-maldives"></div></div>
+    </div>
+    <div class="spartipp" id="tip-maldives" style="margin-top:22px;"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Malediven · Preise</span></div>
+</section>
+
+
+<section class="slide" id="indonesia-intro" data-menu="⑥ Indonesien · Übersicht" data-chapter="1">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 3 · Indonesien</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Vulkane, Drachen &amp; Traumstrände in 14 Tagen</h2>
+    <div style="display:flex;gap:40px;margin-top:20px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:40%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kelingking_Beach.jpg" onerror="imgFallback(this)" alt="Kelingking Beach">
+        <div class="fallback"><b>🏝️ Kelingking Beach</b></div>
+        <div class="cap">Kelingking Beach, Nusa Penida</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px;">
+        <p style="font-size:19px;color:var(--ink);line-height:1.4;margin:0;background:var(--sand-deep);padding:14px 20px;border-radius:14px;">Indonesien liefert auf zwei Wochen genau eure Mischung: Traumstrände, Vulkan- und Tauchabenteuer, reiche Kultur samt Streetfood – und jede Menge romantische Sonnenuntergänge.</p>
+        <div class="pinmap" style="flex:1;" id="indonesia-pin"></div>
+      </div>
+    </div>
+    <div style="margin-top:20px;">
+      <h4 style="font-size:19px;color:var(--teal);margin-bottom:10px;">Vorschlag für eure 14 Tage:</h4>
+      <div class="pinmap" style="height:200px;" id="indonesia-route"></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Indonesien · Übersicht &amp; Route</span></div>
+</section>
+
+<section class="slide" id="indonesia-highlights" data-menu="Indonesien · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Indonesien</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights der Route</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kelingking_Beach.jpg" onerror="imgFallback(this)" alt="Kelingking Beach"><div class="fallback"><b>🏝️ Kelingking</b></div><div class="tag">Strand &amp; Aussicht</div><div class="cap">Kelingking Beach, Nusa Penida – der "T-Rex"-Blick</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Batur_panorama.jpg" onerror="imgFallback(this)" alt="Mount Batur"><div class="fallback"><b>🌋 Mount Batur</b></div><div class="tag">Abenteuer</div><div class="cap">Sonnenaufgangs-Trekking, Mount Batur (1.717 m)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Komodo_dragon_(Varanus_komodoensis).jpg" onerror="imgFallback(this)" alt="Komodo-Drache"><div class="fallback"><b>🦎 Komodo-Drache</b></div><div class="tag">Abenteuer</div><div class="cap">Komodo-Drachen in freier Wildbahn</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pink_Beach,_Padar_Island,_Komodo_National_Park.jpg" onerror="imgFallback(this)" alt="Pink Beach Padar Island"><div class="fallback"><b>🏖️ Pink Beach</b></div><div class="tag">Strand</div><div class="cap">Pink Beach, Padar Island (Komodo-Nationalpark)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/1_Tegalalang_rice_terrace_ubud_bali.jpg" onerror="imgFallback(this)" alt="Tegallalang Reisterrassen"><div class="fallback"><b>🌾 Tegallalang</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Reisterrassen &amp; Warungs, Ubud</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Uluwatu_Temple_at_Sunset.jpg" onerror="imgFallback(this)" alt="Uluwatu Tempel Sonnenuntergang"><div class="fallback"><b>🛕 Uluwatu</b></div><div class="tag">Romantik</div><div class="cap">Klifftempel Uluwatu bei Sonnenuntergang + Kecak-Tanz</div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Indonesien · Highlights</span></div>
+</section>
+
+<section class="slide" id="indonesia-crit" data-menu="Indonesien · Kriterien">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Indonesien</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Ehrliche Bewertung</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1;" id="crit-indonesia"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Indonesien · Kriterien</span></div>
+</section>
+
+<section class="slide" id="indonesia-cost" data-menu="Indonesien · Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Indonesien</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Preise für 2 Wochen (Schätzung 2027, p. P.)</h2>
+    <div style="display:flex;gap:30px;flex:1;">
+      <div class="costcol"><h3>🎒 Studentenbudget</h3><p style="font-size:16px;color:var(--muted);margin:-8px 0 0;">Homestay/Hostel, lokales Essen, Shared-Boat-Touren</p><div id="cost-budget-indonesia"></div></div>
+      <div class="costcol dream"><h3>💎 Traumvariante</h3><p style="font-size:16px;color:#C9DEDA;margin:-8px 0 0;">Boutique-Hotel, private Touren, Premium-Boot</p><div id="cost-dream-indonesia"></div></div>
+    </div>
+    <div class="spartipp" id="tip-indonesia" style="margin-top:22px;"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Indonesien · Preise</span></div>
+</section>
+
+
+<section class="slide" id="hawaiiland-intro" data-menu="⑦ Hawaii Landurlaub · Übersicht" data-chapter="1">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 4 · Hawaii als Landurlaub</div>
+    <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Inselhopping auf eigene Faust – kein Kreuzfahrtschiff</h2>
+    <div style="display:flex;gap:40px;margin-top:18px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:38%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NaPaliCoast.jpg" onerror="imgFallback(this)" alt="Na Pali Coast Kauai">
+        <div class="fallback"><b>🏔️ Nā Pali Coast</b></div>
+        <div class="cap">Nā Pali Coast, Kauaʻi</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+        <p style="font-size:18px;color:var(--ink);line-height:1.4;margin:0;background:var(--sand-deep);padding:14px 20px;border-radius:14px;">Statt nur 1 Tag pro Hafen wohnt ihr mit Mietwagen mehrere Tage pro Insel – mehr Zeit zum Wandern, Tauchen und Campen, dafür mehr Organisation (Flüge, Autos, Hotels einzeln).</p>
+        <table style="width:100%;border-collapse:collapse;font-size:15px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--line);">
+          <tr style="background:var(--teal-deep);color:#fff;"><th style="padding:8px;text-align:left;"></th><th style="padding:8px;">Landurlaub</th><th style="padding:8px;">Kreuzfahrt</th></tr>
+          <tr><td style="padding:7px 8px;color:var(--muted);">Zeit/Insel</td><td style="padding:7px 8px;text-align:center;">3–6 Tage</td><td style="padding:7px 8px;text-align:center;">~1 Tag</td></tr>
+          <tr style="background:var(--sand-deep);"><td style="padding:7px 8px;color:var(--muted);">Mobilität</td><td style="padding:7px 8px;text-align:center;">Mietwagen, frei</td><td style="padding:7px 8px;text-align:center;">Bustouren ab Hafen</td></tr>
+          <tr><td style="padding:7px 8px;color:var(--muted);">Wandern/Camping</td><td style="padding:7px 8px;text-align:center;">✓ gut möglich</td><td style="padding:7px 8px;text-align:center;">kaum Zeit</td></tr>
+        </table>
+        <div class="pinmap" style="flex:1;" id="hawaiiland-pin"></div>
+      </div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii Landurlaub · Übersicht &amp; Anreise</span></div>
+</section>
+
+<section class="slide" id="hawaiiland-highlights" data-menu="Hawaii Landurlaub · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Hawaii — Landurlaub</div>
+    <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Highlights: Oʻahu · Maui · Big Island</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_Beach_(2024)-L1004709.jpg" onerror="imgFallback(this)" alt="Waikiki Beach"><div class="fallback"><b>🏖️ Waikīkī</b></div><div class="tag">Strand</div><div class="cap">Waikīkī Beach, Oʻahu</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/NaPaliCoast.jpg" onerror="imgFallback(this)" alt="Na Pali Coast"><div class="fallback"><b>🏔️ Nā Pali</b></div><div class="tag">Abenteuer</div><div class="cap">Kalalau Trail, Nā Pali Coast (Kauaʻi) – optionale Verlängerung</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Puu_Oo_looking_up_Kilauea_-_edit.jpg" onerror="imgFallback(this)" alt="Kilauea Vulkan"><div class="fallback"><b>🌋 Kīlauea</b></div><div class="tag">Abenteuer</div><div class="cap">Aktiver Vulkan Kīlauea, Big Island</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Molokini_Aerial.jpg" onerror="imgFallback(this)" alt="Molokini Krater"><div class="fallback"><b>🤿 Molokini</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln im Molokini-Krater, Maui</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Luau_Dancer_-_Maui,_Hawaii.jpg" onerror="imgFallback(this)" alt="Lūʻau Tänzerin"><div class="fallback"><b>💃 Lūʻau</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Traditionelles Lūʻau-Fest mit Hula &amp; Kalua-Schwein</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waianapanapa_black_sand_beach_Maui_Hawaii_Road_to_Hana_(43923399650).jpg" onerror="imgFallback(this)" alt="Waianapanapa Lavastrand"><div class="fallback"><b>🌑 Waiʻānapanapa</b></div><div class="tag">Romantik</div><div class="cap">Schwarzer Lavastrand Waiʻānapanapa, Road to Hana</div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii Landurlaub · Highlights</span></div>
+</section>
+
+<section class="slide" id="hawaiiland-crit" data-menu="Hawaii Landurlaub · Kriterien">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Hawaii — Landurlaub</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Ehrliche Bewertung</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1;" id="crit-hawaii-land"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii Landurlaub · Kriterien</span></div>
+</section>
+
+<section class="slide" id="hawaiiland-cost" data-menu="Hawaii Landurlaub · Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Hawaii — Landurlaub</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Preise für 2 Wochen (Schätzung 2027, p. P.)</h2>
+    <div style="display:flex;gap:30px;flex:1;">
+      <div class="costcol"><h3>🎒 Studentenbudget</h3><p style="font-size:16px;color:var(--muted);margin:-8px 0 0;">Hostel/Airbnb-Zimmer, teils Camping, Selbstversorgung</p><div id="cost-budget-hawaii-land"></div></div>
+      <div class="costcol dream"><h3>💎 Traumvariante</h3><p style="font-size:16px;color:#C9DEDA;margin:-8px 0 0;">Boutique-/Oceanfront-Resort, private Touren</p><div id="cost-dream-hawaii-land"></div></div>
+    </div>
+    <div class="spartipp" id="tip-hawaii-land" style="margin-top:22px;"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii Landurlaub · Preise</span></div>
+</section>
+
+<section class="slide" id="italy-intro" data-menu="⑧ Italien (Sizilien) · Übersicht" data-chapter="1">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 5 · Italien</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Sizilien: Vulkan, Antike &amp; Direktflug in 2h15</h2>
+    <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:40%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/DSCF1069-Etna_Volcano-Sicilia-Italy-Castielli_CC0-HQ.jpg" onerror="imgFallback(this)" alt="Ätna Vulkan">
+        <div class="fallback"><b>🌋 Ätna</b></div>
+        <div class="cap">Der Ätna – Europas aktivster Vulkan</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:18px;">
+        <p style="font-size:21px;color:var(--ink);line-height:1.5;margin:0;background:var(--sand-deep);padding:18px 22px;border-radius:16px;">Sizilien vereint alles auf einer Insel: Strand, ein echter aktiver Vulkan zum Wandern, jahrtausendealte Kultur (Griechen, Römer, Araber, Normannen) und erstklassiges Essen – dazu Direktflug ohne Zeitverschiebung ab Stuttgart.</p>
+        <div class="pinmap" style="flex:1;" id="italy-pin"></div>
+      </div>
+    </div>
+    <div style="margin-top:22px;">
+      <h4 style="font-size:19px;color:var(--teal);margin-bottom:10px;">Route rund um die Insel:</h4>
+      <div class="pinmap" style="height:200px;" id="italy-route"></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Italien · Übersicht &amp; Anreise</span></div>
+</section>
+
+<section class="slide" id="italy-highlights" data-menu="Italien · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Italien — Sizilien</div>
+    <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights der Rundreise</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/DSCF1069-Etna_Volcano-Sicilia-Italy-Castielli_CC0-HQ.jpg" onerror="imgFallback(this)" alt="Ätna Wanderung"><div class="fallback"><b>🌋 Ätna</b></div><div class="tag">Abenteuer</div><div class="cap">Geführte Wanderung auf den Ätna</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Scala_dei_Turchi.jpg" onerror="imgFallback(this)" alt="Scala dei Turchi"><div class="fallback"><b>🏖️ Scala dei Turchi</b></div><div class="tag">Strand</div><div class="cap">Scala dei Turchi, Agrigento</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Taormina-Teatro_Greco01.JPG" onerror="imgFallback(this)" alt="Teatro Greco Taormina"><div class="fallback"><b>🏛️ Teatro Greco</b></div><div class="tag">Romantik &amp; Kultur</div><div class="cap">Antikes Theater Taormina mit Ätna-Blick</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mercato_di_ballar%C3%B2_-_palermo.jpg" onerror="imgFallback(this)" alt="Mercato Ballaro Palermo"><div class="fallback"><b>🍊 Mercato Ballarò</b></div><div class="tag">Essen &amp; Kultur</div><div class="cap">Street Food Markt Ballarò, Palermo</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stromboli_Eruption.jpg" onerror="imgFallback(this)" alt="Stromboli Eruption"><div class="fallback"><b>🌋 Stromboli</b></div><div class="tag">Abenteuer</div><div class="cap">Stromboli bei Nacht – Bootstour zu den Liparischen Inseln</div></div>
+      <div class="imgcard" style="background:linear-gradient(135deg,#0E5F67,#1C3438);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">⛱️</div><b style="font-size:20px;font-family:'Fraunces',serif;">Cefalù</b><p style="font-size:15px;margin-top:8px;color:#CFE3DF;">Normannische Kathedrale, Felsen "La Rocca" &amp; feiner Sandstrand</p></div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Italien · Highlights</span></div>
+</section>
+
+<section class="slide" id="italy-crit" data-menu="Italien · Kriterien">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Italien — Sizilien</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Ehrliche Bewertung</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1;" id="crit-italy"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Italien · Kriterien</span></div>
+</section>
+
+<section class="slide" id="italy-cost" data-menu="Italien · Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Italien — Sizilien</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Preise für 2 Wochen (Schätzung 2027, p. P.)</h2>
+    <div style="display:flex;gap:30px;flex:1;">
+      <div class="costcol"><h3>🎒 Studentenbudget</h3><p style="font-size:16px;color:var(--muted);margin:-8px 0 0;">Airbnb/Agriturismo, Bus/Vespa-Verleih</p><div id="cost-budget-italy"></div></div>
+      <div class="costcol dream"><h3>💎 Traumvariante</h3><p style="font-size:16px;color:#C9DEDA;margin:-8px 0 0;">Boutique-Hotel mit Meerblick, Mietwagen</p><div id="cost-dream-italy"></div></div>
+    </div>
+    <div class="spartipp" id="tip-italy" style="margin-top:22px;"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Italien · Preise</span></div>
+</section>
+
+<section class="slide" id="portugal-intro" data-menu="⑨ Portugal · Übersicht" data-chapter="1">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kapitel 6 · Portugal</div>
+    <h2 style="font-size:42px;margin-top:8px;color:var(--teal-deep);">Azoren + Lissabon + Algarve: Vulkane UND Strand</h2>
+    <div style="display:flex;gap:40px;margin-top:18px;flex:1;min-height:0;">
+      <div class="imgcard" style="width:38%;">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_das_Sete_Cidades3.jpg" onerror="imgFallback(this)" alt="Sete Cidades Kraterseen">
+        <div class="fallback"><b>🌋 Sete Cidades</b></div>
+        <div class="cap">Kraterseen von Sete Cidades, Azoren</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px;">
+        <p style="font-size:18px;color:var(--ink);line-height:1.4;margin:0;background:var(--sand-deep);padding:14px 20px;border-radius:14px;">Eine Kombi aus São Miguel (Azoren), Lissabon und der Algarve deckt als einzige Portugal-Option wirklich alle vier Reisestile ab – vulkanische Abenteuer-Natur UND Städte-Kultur UND Sonnenstrand. Preis dafür: zwei Inlandsflüge, mehr Programm.</p>
+        <div class="pinmap" style="flex:1;" id="portugal-pin"></div>
+      </div>
+    </div>
+    <div style="margin-top:18px;">
+      <h4 style="font-size:18px;color:var(--teal);margin-bottom:8px;">Route: Azoren → Lissabon → Algarve</h4>
+      <div class="pinmap" style="height:170px;" id="portugal-route"></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Portugal · Übersicht &amp; Route</span></div>
+</section>
+
+<section class="slide" id="portugal-highlights" data-menu="Portugal · Highlights">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Portugal — Azoren + Lissabon + Algarve</div>
+    <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Highlights der Route</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:22px;min-height:0;">
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_das_Sete_Cidades3.jpg" onerror="imgFallback(this)" alt="Sete Cidades"><div class="fallback"><b>🌋 Sete Cidades</b></div><div class="tag">Natur &amp; Aussicht</div><div class="cap">Zwei Kraterseen, Sete Cidades (São Miguel)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parque_Terra_Nostra,_Piscina_de_%C3%A1gua_f%C3%A9rrea,_Furnas,_ilha_de_S%C3%A3o_Miguel,_A%C3%A7ores.JPG" onerror="imgFallback(this)" alt="Terra Nostra Furnas"><div class="fallback"><b>♨️ Terra Nostra</b></div><div class="tag">Abenteuer</div><div class="cap">Baden in vulkanischer Quelle, Furnas</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Whale_(50683933721).jpg" onerror="imgFallback(this)" alt="Wal vor den Azoren"><div class="fallback"><b>🐋 Walbeobachtung</b></div><div class="tag">Abenteuer</div><div class="cap">Walbeobachtung vor São Miguel</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG" onerror="imgFallback(this)" alt="Alfama Lissabon"><div class="fallback"><b>🏘️ Alfama</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Alfama-Viertel, Lissabon – Tram 28 &amp; Fado</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Benagil_Cave_(3).jpg" onerror="imgFallback(this)" alt="Benagil Höhle"><div class="fallback"><b>🕳️ Benagil-Höhle</b></div><div class="tag">Strand</div><div class="cap">Benagil-Höhle, Algarve – per Kajak oder Boot</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pena_Palace_atop_a_hill_in_the_Sintra_Mountains.jpg" onerror="imgFallback(this)" alt="Pena Palast Sintra"><div class="fallback"><b>🏰 Pena-Palast</b></div><div class="tag">Romantik</div><div class="cap">Märchenschloss Palácio da Pena, Sintra</div></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Portugal · Highlights</span></div>
+</section>
+
+<section class="slide" id="portugal-crit" data-menu="Portugal · Kriterien">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Portugal</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Ehrliche Bewertung</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:18px;flex:1;" id="crit-portugal"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Portugal · Kriterien</span></div>
+</section>
+
+<section class="slide" id="portugal-cost" data-menu="Portugal · Preise">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Portugal</div>
+    <h2 style="font-size:46px;margin-top:8px;margin-bottom:24px;color:var(--teal-deep);">Preise für 2 Wochen (Schätzung 2027, p. P.)</h2>
+    <div style="display:flex;gap:30px;flex:1;">
+      <div class="costcol"><h3>🎒 Studentenbudget</h3><p style="font-size:16px;color:var(--muted);margin:-8px 0 0;">Pension/Airbnb, Mietwagen geteilt</p><div id="cost-budget-portugal"></div></div>
+      <div class="costcol dream"><h3>💎 Traumvariante</h3><p style="font-size:16px;color:#C9DEDA;margin:-8px 0 0;">Boutique-/Design-Hotels, private Wal-Tour</p><div id="cost-dream-portugal"></div></div>
+    </div>
+    <div class="spartipp" id="tip-portugal" style="margin-top:22px;"></div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Portugal · Preise</span></div>
+</section>
+
+
+<section class="slide" id="comparison" data-menu="⑩ Großer Vergleich" data-chapter="1" style="background:var(--teal-deep);">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel" style="color:#7FD9CD;">Zum Schluss</div>
+    <h2 style="font-size:46px;margin-top:8px;color:#fff;">Alle acht Ziele im Vergleich</h2>
+    <p style="font-size:18px;color:#CFE3DF;margin-top:6px;">Keine Empfehlung, kein Gewinner – diese Entscheidung trefft ihr. 🙂</p>
+    <div style="flex:1;margin-top:18px;overflow:hidden;" id="big-comparison-mount"></div>
+  </div>
+  <div class="footerbar" style="border-top:1px solid rgba(255,255,255,0.15);"><span style="color:#CFE3DF;">Unser Sommer 2027</span><span style="color:#CFE3DF;">Vergleich aller Ziele</span></div>
+</section>
+
+<section class="slide" id="priority" data-menu="Wenn euch X wichtig ist …">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="eyebrow">Entscheidungshilfe</div>
+    <h2 style="font-size:50px;margin-top:10px;color:var(--teal-deep);">Wenn euch eins davon am wichtigsten ist …</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px;flex:1;">
+      <div class="critcard" style="padding:22px 26px;"><h4>💶 Preis</h4><p style="font-size:19px;">→ Italien (Sizilien) oder Mittelmeer-Kreuzfahrt – günstigste Gesamtpakete, beide mit kurzem/günstigem Flug.</p></div>
+      <div class="critcard" style="padding:22px 26px;"><h4>🧗 Abenteuer</h4><p style="font-size:19px;">→ Hawaii (Kreuzfahrt oder Land), Indonesien oder Italien – die einzigen vier mit einem echten, aktiven Vulkan zum Erleben.</p></div>
+      <div class="critcard" style="padding:22px 26px;"><h4>✈️ Kurze, einfache Anreise</h4><p style="font-size:19px;">→ Italien oder Mittelmeer-Kreuzfahrt – Direktflug, über 2 Std., keine Zeitverschiebung.</p></div>
+      <div class="critcard" style="padding:22px 26px;"><h4>🌦️ Verlässliches Wetter im Aug/Sep</h4><p style="font-size:19px;">→ Indonesien oder Hawaii (Trockenzeit). <b style="color:var(--coral);">Nicht</b> die Karibik – Hurrikan-Hochsaison!</p></div>
+      <div class="critcard" style="padding:22px 26px;"><h4>🤝 Kultur &amp; Essen</h4><p style="font-size:19px;">→ Mittelmeer-Kreuzfahrt oder Italien – jahrtausendealte Geschichte und Weltklasse-Küche.</p></div>
+      <div class="critcard" style="padding:22px 26px;"><h4>💎 Das eine große Traum-Erlebnis</h4><p style="font-size:19px;">→ Malediven-Wasservilla – teuerste, aber einzigartigste Option von allen acht.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Entscheidungshilfe</span></div>
+</section>
+
+<section class="slide" id="closing" data-menu="⑪ Zum Schluss">
+  <div style="position:absolute;inset:0;">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Benagil_Cave_(3).jpg" onerror="imgFallback(this)" alt="Benagil Höhle Algarve" style="width:100%;height:100%;object-fit:cover;">
+    <div class="fallback" style="display:none;position:absolute;inset:0;background:linear-gradient(135deg,#0E5F67,#1C3438);"><b style="color:#fff;font-size:30px;">🌊 Euer Sommer 2027</b></div>
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(8,30,33,0.88) 15%, rgba(8,30,33,0.2) 60%);"></div>
+  <div style="position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;height:100%;padding:100px 120px;color:#fff;">
+    <h2 style="font-size:64px;color:#fff;max-width:1400px;">Worauf habt ihr am meisten Lust?</h2>
+    <p style="font-size:24px;margin-top:16px;color:#F3EADA;max-width:1300px;">Schnappt euch einen Kaffee, geht die acht Ziele nochmal durch – und entscheidet gemeinsam. Guten Flug! ✈️</p>
+  </div>
+</section>
+
+<!-- SLIDES_END -->
+    </div>
+  </div>
+</div>
+
+<button class="navbtn" id="prevBtn" aria-label="Zurück">&#8592;</button>
+<button class="navbtn" id="nextBtn" aria-label="Weiter">&#8594;</button>
+<div id="counter">1 / 1</div>
+<button id="menuBtn">☰ Kapitel</button>
+<div id="menuPanel">
+  <button id="closeMenu">✕</button>
+  <h3>Inhalt</h3>
+  <div id="menuList"></div>
+</div>
+
+<script>
+function imgFallback(el){
+  el.style.display='none';
+  var fb = el.parentElement.querySelector('.fallback');
+  if(fb) fb.style.display='flex';
+}
+
+(function(){
+  var frameWrap = document.getElementById('frame-wrap');
+  var stage = document.getElementById('stage');
+  function fit(){
+    var sw = window.innerWidth, sh = window.innerHeight;
+    var scale = Math.min(sw/1920, sh/1080) * 0.96;
+    frameWrap.style.width = 1920*scale + 'px';
+    frameWrap.style.height = 1080*scale + 'px';
+    frameWrap.style.transform = 'scale('+scale+')';
+    frameWrap.style.transformOrigin = 'top left';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var idx = 0;
+  function show(i){
+    if(i<0) i=0;
+    if(i>=slides.length) i=slides.length-1;
+    slides[idx].classList.remove('active');
+    idx = i;
+    slides[idx].classList.add('active');
+    document.getElementById('counter').textContent = (idx+1)+' / '+slides.length;
+    window.scrollTo(0,0);
+  }
+  document.getElementById('nextBtn').addEventListener('click', function(){show(idx+1);});
+  document.getElementById('prevBtn').addEventListener('click', function(){show(idx-1);});
+  window.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight' || e.key===' ') show(idx+1);
+    if(e.key==='ArrowLeft') show(idx-1);
+    if(e.key==='Escape') document.getElementById('menuPanel').classList.remove('open');
+  });
+
+  var menuBtn = document.getElementById('menuBtn');
+  var menuPanel = document.getElementById('menuPanel');
+  menuBtn.addEventListener('click', function(){menuPanel.classList.toggle('open');});
+  document.getElementById('closeMenu').addEventListener('click', function(){menuPanel.classList.remove('open');});
+
+  var menuList = document.getElementById('menuList');
+  slides.forEach(function(s, i){
+    var title = s.getAttribute('data-menu');
+    if(title){
+      var isChap = s.getAttribute('data-chapter')==='1';
+      var a = document.createElement('a');
+      a.href='#';
+      a.textContent = title;
+      if(isChap){ a.style.fontWeight='700'; a.style.color='#fff'; }
+      a.addEventListener('click', function(e){ e.preventDefault(); show(i); menuPanel.classList.remove('open'); });
+      menuList.appendChild(a);
+    }
+  });
+
+  show(0);
+  window.GOTO = show;
+})();
+</script>
+
+<script>
+/* ===== Daten: Bewertungen, Begründungen, Preise – Basis für Kriterien-/Kosten-Folien und die Vergleichstabelle ===== */
+const CRIT_KEYS = ["preis","abenteuer","aussicht","natur","kultur","essen","anreise","wetter"];
+const CRIT_LABELS = {preis:"Preis",abenteuer:"Abenteuer",aussicht:"Aussicht",natur:"Natur",kultur:"Menschen & Kultur",essen:"Essen",anreise:"Anreise & Flugzeit",wetter:"Wetter Aug/Sep"};
+
+const DESTS = {
+"med-cruise":{
+  ratings:{preis:4,abenteuer:3,aussicht:5,natur:2,kultur:5,essen:5,anreise:5,wetter:3},
+  why:{
+    preis:"Günstigste der drei Kreuzfahrt-Varianten dank kurzem Flug – aber August ist Hochsaison, ca. 40% teurer als im Mai/September.",
+    abenteuer:"Solide mit Vulkanwanderung auf Nea Kameni, aber insgesamt eher kultur- als abenteuerlastig.",
+    aussicht:"Caldera-Blick auf Santorin und die Stadtmauern von Dubrovnik zählen zu den fotogensten Orten Europas.",
+    natur:"Wenig echte Wildnis – eher Kulturlandschaft als Natur pur.",
+    kultur:"Antike auf Schritt und Tritt: Akropolis, Ephesus, Dubrovniks Altstadt – dicht gepackt mit UNESCO-Welterbe.",
+    essen:"Italienisch, griechisch, türkisch auf Weltklasse-Niveau.",
+    anreise:"Direktflug Stuttgart–Venedig in nur 1,5 Std., kein Jetlag.",
+    wetter:"Im August oft 32–35°C und überlaufen; im September deutlich angenehmer (25–28°C) und leerer."
+  },
+  price:{
+    budget:{items:[["Flug","150 €"],["Kabine (Innen, September)","950 €"],["Essen","inklusive"],["Aktivitäten","150 €"]], total:"1.250–1.400 €"},
+    traum:{items:[["Flug","280 €"],["Balkonkabine (August)","2.400 €"],["Specialty-Restaurants","300 €"],["Premium-Ausflüge","500 €"]], total:"3.400–3.700 €"}
+  },
+  spartipp:"Im September statt August fahren – 30–40% günstigere Kabinenpreise und deutlich weniger Touristenmassen."
+},
+"carib-cruise":{
+  ratings:{preis:3,abenteuer:4,aussicht:4,natur:4,kultur:3,essen:3,anreise:2,wetter:1},
+  why:{
+    preis:"Die Kreuzfahrt selbst ist günstig, aber der Langstreckenflug treibt den Gesamtpreis deutlich nach oben.",
+    abenteuer:"Schnorcheln mit Rochen und Wasserfall-Klettern in Jamaika sind toll, aber es fehlt ein Vulkan-Highlight.",
+    aussicht:"Türkises Wasser und Küsten sind schön, aber Kreuzfahrthäfen oft touristisch verbaut.",
+    natur:"Korallenriffe (teils geschädigt) und Regenwald – ordentlich, aber nicht einzigartig.",
+    kultur:"Karibische Kultur vorhanden, aber Cruise-Terminals sind oft eine künstliche Shopping-Blase.",
+    essen:"Ordentlich, aber viel Bordverpflegung statt echter lokaler Küche.",
+    anreise:"10+ Std. Langstreckenflug über die USA, dazu ESTA-Pflicht.",
+    wetter:"Wichtig: August/September liegen genau im Zentrum der atlantischen Hurrikansaison (Höhepunkt 10. September) – Routenänderungen möglich, dazu drückende Hitze."
+  },
+  price:{
+    budget:{items:[["Flug (über Frankfurt)","750 €"],["Innenkabine","800 €"],["Essen","inklusive"],["Aktivitäten","200 €"]], total:"1.750–2.100 €"},
+    traum:{items:[["Flug (Premium Economy)","1.500 €"],["Balkonkabine","2.000 €"],["Specialty-Restaurants","350 €"],["Premium-Ausflüge","550 €"]], total:"4.300–4.700 €"}
+  },
+  spartipp:"Reiseversicherung mit Sturmschutz einplanen – ein ausgefallener Hafen durch einen Hurrikan kostet sonst ein Vielfaches."
+},
+"hawaii-cruise":{
+  ratings:{preis:2,abenteuer:5,aussicht:5,natur:5,kultur:3,essen:3,anreise:1,wetter:4},
+  why:{
+    preis:"Teuerste Variante: Kreuzfahrt (NCL-Monopol), Langstreckenflug und zusätzliche Hotelnächte addieren sich.",
+    abenteuer:"Aktiver Vulkan, Wandern, Top-Schnorcheln – trifft den Abenteuer-Wunsch am besten von allen drei Kreuzfahrt-Varianten.",
+    aussicht:"Vulkankrater, Nā-Pali-Küste, Traumstrände – einzigartig weltweit.",
+    natur:"Nationalparks und einzigartige Vulkanlandschaft.",
+    kultur:"Hawaiianische Kultur spürbar, aber Oahu/Maui sind touristisch stark amerikanisiert.",
+    essen:"Gute Fusionküche, aber generell teuer und importabhängig.",
+    anreise:"Mit Abstand die anstrengendste Anreise: 20–22 Std., 1 Umstieg, 12 Std. Zeitverschiebung.",
+    wetter:"Trockenzeit, beständig warm, geringeres Hurrikanrisiko als im Atlantik – nur gelegentlicher Vulkandunst (Vog)."
+  },
+  price:{
+    budget:{items:[["Flug","1.000 €"],["Kabine (7 Nächte)","1.150 €"],["Hotel (7 Nächte)","900 €"],["Essen & Aktivitäten","500 €"]], total:"3.550–3.900 €"},
+    traum:{items:[["Flug","1.900 €"],["Balkonkabine","2.900 €"],["Resort-Hotel","2.500 €"],["Essen & Aktivitäten","1.400 €"]], total:"8.700–9.000 €"}
+  },
+  spartipp:"Ein Condo/Airbnb etwas außerhalb (z. B. Kihei statt Wailea) statt Resort-Hotel spart oft 40–50% bei der Übernachtung."
+},
+"maldives":{
+  ratings:{preis:2,abenteuer:4,aussicht:5,natur:5,kultur:3,essen:3,anreise:3,wetter:3},
+  why:{
+    preis:"Resort-Malediven zählen zu den teuersten Reisezielen der Welt; nur mit Gästehaus auf lokaler Insel halbwegs erschwinglich.",
+    abenteuer:"Weltklasse-Tauchen/Schnorcheln mit Mantas und Walhaien, aber kein Wandern oder Vulkane.",
+    aussicht:"Türkise Lagunen und Sandbänke – visuell kaum zu toppen.",
+    natur:"Einzigartige Unterwasserwelt, dafür so gut wie keine Landnatur.",
+    kultur:"Konservative Inselkultur (Alkoholverbot auf lokalen Inseln), Resorts oft kulturell isoliert.",
+    essen:"Frische Fischküche gut, aber Resort-Preise extrem hoch.",
+    anreise:"10–12 Std. Flug plus Umstieg, aber nur 3 Std. Zeitverschiebung – kaum Jetlag.",
+    wetter:"Südwest-Monsun, September regenreichster Monat (meist kurze Schauer) – dafür beste Mantarochen-Zeit und Nebensaison-Preise."
+  },
+  price:{
+    budget:{items:[["Flug","700 €"],["Gästehaus (14 Nächte)","1.200 €"],["Essen","380 €"],["Aktivitäten (inkl. Hanifaru Bay)","350 €"]], total:"1.800–3.600 €"},
+    traum:{items:[["Flug","800 €"],["Wasservilla All-Inclusive (14 N.)","15.000 €"],["Extras (Getränke etc.)","450 €"],["Aktivitäten (inkl. Ithaa-Dinner)","1.000 €"]], total:"11.300–24.000 €"}
+  },
+  spartipp:"Unterkunft per Fähre/Speedboat statt Wasserflugzeug wählen (lokale Insel statt Resort) – spart mehrere Tausend Euro."
+},
+"indonesia":{
+  ratings:{preis:3,abenteuer:5,aussicht:5,natur:5,kultur:4,essen:4,anreise:2,wetter:4},
+  why:{
+    preis:"Vor Ort sehr günstig, aber der Langstreckenflug treibt die Gesamtkosten deutlich nach oben.",
+    abenteuer:"Vulkan-Trekking am Mount Batur, Tauchen/Schnorcheln, Komodo-Drachen – kaum zu toppen.",
+    aussicht:"Kelingking Beach, Padar Island und der Batur-Sonnenaufgang gehören zu den fotogensten Orten Südostasiens.",
+    natur:"Vulkane, Korallenriffe, Regenwald und einzigartige Fauna wie die Komodo-Drachen.",
+    kultur:"Reiche balinesische Tempel- und Tanzkultur, aber Bali/Gili T. sind in der Hauptsaison touristisch sehr geprägt.",
+    essen:"Vielfältig und günstig, auf den kleineren Inseln aber weniger Auswahl.",
+    anreise:"16–20 Std. mit mindestens einem Umstieg – längste und anstrengendste Anreise im Vergleich.",
+    wetter:"Beste Trockenzeit mit idealer Sicht zum Tauchen – dafür auch Hauptreisezeit mit vollen Stränden und Höchstpreisen."
+  },
+  price:{
+    budget:{items:[["Flug","750 €"],["Unterkunft & Komodo-Boot","480 €"],["Essen","150 €"],["Transfers & Aktivitäten","270 €"]], total:"1.650–1.750 €"},
+    traum:{items:[["Flug","1.100 €"],["Boutique-Hotels","1.500 €"],["Komodo Premium-Kabine","700 €"],["Essen & private Touren","900 €"]], total:"4.200–4.800 €"}
+  },
+  spartipp:"Komodo-Tour direkt vor Ort in Labuan Bajo als Open-Trip-Boot buchen statt online vorab – spart oft 150–300 US$."
+},
+"hawaii-land":{
+  ratings:{preis:2,abenteuer:5,aussicht:5,natur:5,kultur:4,essen:4,anreise:1,wetter:4},
+  why:{
+    preis:"Eines der teuersten Reiseziele der Welt – dazu kommt der extrem teure Langstreckenflug.",
+    abenteuer:"Vulkane, Tauchen/Schnorcheln, Wandern, Surfen – kaum ein Ziel bietet mehr Vielfalt.",
+    aussicht:"Vulkanlandschaften, Steilküsten und Regenwald-Wasserfälle – durchgehend spektakulär.",
+    natur:"Einzigartige vulkanische Inselwelt mit mehreren Klimazonen auf engstem Raum.",
+    kultur:"Eigenständige polynesisch-amerikanische Mischkultur, in Touristenzentren aber kommerzialisiert.",
+    essen:"Spannende Fusion aus hawaiianisch/asiatisch/amerikanisch, aber generell teuer.",
+    anreise:"Kein Direktflug, 20+ Std. Tür-zu-Tür, 12 Std. Zeitverschiebung – die größte Hürde des ganzen Trips.",
+    wetter:"Sehr verlässlich warm, Pazifik-Hurrikantreffer selten – Hauptsaison bedeutet aber höhere Preise und mehr Trubel."
+  },
+  price:{
+    budget:{items:[["Interkontinentalflug","1.100 €"],["Inter-Island-Flüge","200 €"],["Unterkunft","650 €"],["Mietwagen, Essen & Aktivitäten","900 €"]], total:"2.400–3.600 €"},
+    traum:{items:[["Flug","2.300 €"],["Inter-Island-Flüge","325 €"],["Boutique-/Oceanfront-Resort","4.900 €"],["Mietwagen, Essen & Touren","3.000 €"]], total:"8.000–13.500 €"}
+  },
+  spartipp:"Airbnb/Condo mit Küche etwas abseits der Touristenzentren (z. B. Kihei statt Wailea) spart 30–40% der Gesamtkosten."
+},
+"italy":{
+  ratings:{preis:3,abenteuer:5,aussicht:5,natur:5,kultur:5,essen:5,anreise:5,wetter:3},
+  why:{
+    preis:"Günstiger als die Fernziele, aber August bedeutet Hauptsaison-Preise bei Flug und Hotel.",
+    abenteuer:"Ätna-Gipfeltour, aktiver Vulkan Stromboli bei Nacht, Schnorcheln an den Liparischen Inseln.",
+    aussicht:"Teatro Greco mit Ätna-Blick, Scala dei Turchi und die Küstenwege von Cefalù und Taormina.",
+    natur:"Aktiver Vulkan, Naturschutzgebiete und vulkanische Inselwelt.",
+    kultur:"3.000 Jahre Geschichte mit mehreren UNESCO-Welterbestätten – Griechen, Römer, Araber, Normannen.",
+    essen:"Arancini, Pasta alla Norma, Cannoli, Street Food und Ätna-Weine auf Weltklasse-Niveau.",
+    anreise:"Direktflug ab Stuttgart, nur ca. 2h15, keine Zeitverschiebung – klarer Vorteil.",
+    wetter:"August oft 33–37°C und sehr voll; im September deutlich angenehmer (27–30°C), ruhiger und günstiger."
+  },
+  price:{
+    budget:{items:[["Flug","120 €"],["Unterkunft (Airbnb/Agriturismo)","460 €"],["ÖPNV/Roller","175 €"],["Essen & Aktivitäten","515 €"]], total:"1.100–1.450 €"},
+    traum:{items:[["Flug","200 €"],["Boutique-Hotel","1.550 €"],["Mietwagen","500 €"],["Essen & private Touren","750 €"]], total:"3.000–4.000 €"}
+  },
+  spartipp:"Reise auf die erste Septemberwoche statt Mitte August legen – günstigere Preise, weniger Andrang, angenehmere Temperaturen."
+},
+"portugal":{
+  ratings:{preis:3,abenteuer:5,aussicht:5,natur:5,kultur:4,essen:4,anreise:3,wetter:3},
+  why:{
+    preis:"Azoren-Unterkunft/Mietwagen nicht günstig, Festland-Portugal dafür ca. 20–25% günstiger als Deutschland.",
+    abenteuer:"Vulkanwandern auf den Azoren, Walbeobachtung, Tauchen/Schnorcheln und Surfen an der Algarve.",
+    aussicht:"Kraterseen von Sete Cidades, Sintras Märchenschloss und die Klippen der Algarve.",
+    natur:"Vulkanlandschaft und Lorbeerwald auf den Azoren plus reiche Atlantikfauna.",
+    kultur:"Lissabon/Fado sehr reich, die Azoren eher ruhig-ländlich, dafür authentisch.",
+    essen:"Frischer Fisch, Cozido das Furnas und Pastéis de Nata – vielseitig und meist günstiger als in D.",
+    anreise:"Zwei Flüge nötig (Azoren-Direktflüge nur eingeschränkt) – reisetechnisch aufwendiger als eine reine Festland-Reise.",
+    wetter:"Algarve im August sehr heiß und voll; Azoren wechselhaft und milder, aber Regenschauer jederzeit möglich."
+  },
+  price:{
+    budget:{items:[["Flüge (3 Segmente)","400 €"],["Unterkunft","550 €"],["Mietwagen (geteilt)","175 €"],["Essen & Aktivitäten","480 €"]], total:"≈ 1.600 €"},
+    traum:{items:[["Flüge","500 €"],["Boutique-/Design-Hotels","1.700 €"],["Mietwagen","540 €"],["Essen & private Touren","1.170 €"]], total:"≈ 3.900–4.200 €"}
+  },
+  spartipp:"Azoren-Direktflug mindestens 6 Monate im Voraus über TAP/Azores Airlines buchen – oft 150–200 € günstiger pro Person."
+}
+};
+
+function dots(n){
+  var h='';
+  for(var i=1;i<=5;i++) h += '<span class="dot'+(i<=n?' on':'')+'"></span>';
+  return '<span class="ratewrap">'+h+'</span>';
+}
+
+function renderCriteria(id, mountId){
+  var d = DESTS[id];
+  var el = document.getElementById(mountId);
+  if(!el || !d) return;
+  var html = '';
+  CRIT_KEYS.forEach(function(k){
+    html += '<div class="critcard"><h4>'+CRIT_LABELS[k]+' &nbsp; '+dots(d.ratings[k])+'</h4><p>'+d.why[k]+'</p></div>';
+  });
+  el.innerHTML = html;
+}
+
+function renderCosts(id, mountBudgetId, mountDreamId, mountTipId){
+  var d = DESTS[id];
+  if(!d) return;
+  function col(variant){
+    var v = d.price[variant];
+    var rows='';
+    v.items.forEach(function(it){ rows += '<div class="costrow"><span>'+it[0]+'</span><span>'+it[1]+'</span></div>'; });
+    return rows + '<div class="costtotal"><span>Gesamt p.P.</span><span>'+v.total+'</span></div>';
+  }
+  var b = document.getElementById(mountBudgetId);
+  var dr = document.getElementById(mountDreamId);
+  var tip = document.getElementById(mountTipId);
+  if(b) b.innerHTML = col('budget');
+  if(dr) dr.innerHTML = col('traum');
+  if(tip) tip.innerHTML = '💡 <div><b>Spartipp:</b> '+d.spartipp+'</div>';
+}
+
+function renderCruiseCompare(mountId){
+  var ids = ["med-cruise","carib-cruise","hawaii-cruise"];
+  var names = ["Mittelmeer","Karibik","Hawaii"];
+  var chars = [
+    "Kurzer Flug, antike Kultur & Vulkaninsel-Romantik zum günstigsten Preis.",
+    "Klassische Postkarten-Karibik – aber genau in der Hurrikansaison gebucht.",
+    "Teuerstes, aber abenteuerlichstes Naturerlebnis mit echtem Vulkan."
+  ];
+  var el = document.getElementById(mountId);
+  if(!el) return;
+  var html = '<table class="cmp"><tr><th style="text-align:left;width:22%">Kriterium</th>';
+  names.forEach(function(n){ html += '<th>'+n+'</th>'; });
+  html += '</tr>';
+  CRIT_KEYS.forEach(function(k){
+    html += '<tr><td style="text-align:left;color:#EFE6D4;">'+CRIT_LABELS[k]+'</td>';
+    ids.forEach(function(id){ html += '<td>'+dots(DESTS[id].ratings[k])+'</td>'; });
+    html += '</tr>';
+  });
+  html += '<tr><td style="text-align:left;color:#EFE6D4;font-weight:700;">Preisspanne p.P.</td>';
+  ids.forEach(function(id){ html += '<td style="font-weight:700;">'+DESTS[id].price.budget.total.split('–')[0].trim()+' – '+DESTS[id].price.traum.total.split('–').pop().trim()+'</td>'; });
+  html += '</tr></table>';
+  html += '<div style="display:flex;gap:28px;margin-top:22px;">';
+  chars.forEach(function(c,i){ html += '<div style="flex:1;background:rgba(255,255,255,0.06);border-radius:14px;padding:18px 20px;color:#DCEEEA;font-size:18px;line-height:1.4;"><b style="color:#fff;">'+names[i]+':</b> '+c+'</div>'; });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+const DEST_ORDER = ["med-cruise","carib-cruise","hawaii-cruise","maldives","indonesia","hawaii-land","italy","portugal"];
+const DEST_NAMES = {"med-cruise":"Kreuzfahrt Mittelmeer","carib-cruise":"Kreuzfahrt Karibik","hawaii-cruise":"Kreuzfahrt Hawaii","maldives":"Malediven","indonesia":"Indonesien","hawaii-land":"Hawaii (Land)","italy":"Italien (Sizilien)","portugal":"Portugal (Azoren+)"};
+
+function renderBigComparison(mountId){
+  var el = document.getElementById(mountId);
+  if(!el) return;
+  var html = '<table class="cmp"><tr><th style="text-align:left;">Ziel</th>';
+  CRIT_KEYS.forEach(function(k){ html += '<th>'+CRIT_LABELS[k].replace(' & ','&<br>').replace(' ','<br>')+'</th>'; });
+  html += '<th>Preis p.P. (2 Wo.)</th></tr>';
+  DEST_ORDER.forEach(function(id){
+    var d = DESTS[id];
+    html += '<tr><td style="text-align:left;font-weight:700;color:#fff;">'+DEST_NAMES[id]+'</td>';
+    CRIT_KEYS.forEach(function(k){ html += '<td>'+dots(d.ratings[k])+'</td>'; });
+    html += '<td style="font-weight:700;white-space:nowrap;">'+d.price.budget.total.split('–')[0].trim()+' – '+d.price.traum.total.split('–').pop().trim()+'</td>';
+    html += '</tr>';
+  });
+  html += '</table>';
+  el.innerHTML = html;
+}
+
+const WORLD_PINS = [
+  {name:"Mittelmeer-Kreuzfahrt", x:53.4, y:25.3, group:"cruise", dir:"up"},
+  {name:"Karibik-Kreuzfahrt", x:27.7, y:35.5, group:"cruise", dir:"down"},
+  {name:"Hawaii (Kreuzfahrt &amp; Landurlaub)", x:6.2, y:38.2, group:"cruise", dir:"up"},
+  {name:"Malediven", x:70.4, y:47.7, group:"beach", dir:"up"},
+  {name:"Indonesien", x:82.0, y:54.9, group:"beach", dir:"down"},
+  {name:"Italien (Sizilien)", x:54.2, y:29.2, group:"europe", dir:"down"},
+  {name:"Portugal (Azoren+)", x:42.9, y:29.0, group:"europe", dir:"up"}
+];
+function renderWorldPins(mountId){
+  var el = document.getElementById(mountId);
+  if(!el) return;
+  var colors = {cruise:"#2FBFB0", beach:"#F2714A", europe:"#E8A93C"};
+  var html = '';
+  WORLD_PINS.forEach(function(p){
+    var hShift = '-50%';
+    if(p.x < 10){ hShift='0%'; }
+    else if(p.x > 90){ hShift='-100%'; }
+    var vOffset = p.dir==='down' ? (p.y+2.2) : (p.y-2.2);
+    var vTransform = p.dir==='down' ? 'translate('+hShift+',0%)' : 'translate('+hShift+',-100%)';
+    html += '<div style="position:absolute;left:'+p.x+'%;top:'+p.y+'%;width:20px;height:20px;transform:translate(-50%,-50%);border-radius:50%;background:'+colors[p.group]+';box-shadow:0 0 0 6px '+colors[p.group]+'40,0 2px 6px rgba(0,0,0,0.4);z-index:2;"></div>';
+    html += '<div style="position:absolute;left:'+p.x+'%;top:'+vOffset+'%;transform:'+vTransform+';font-family:\'Inter\',sans-serif;font-weight:700;font-size:16px;color:#fff;background:rgba(8,38,42,0.92);padding:5px 12px;border-radius:8px;white-space:nowrap;z-index:3;">'+p.name+'</div>';
+  });
+  html += '<div style="position:absolute;bottom:24px;left:24px;display:flex;gap:22px;">'+
+    '<span style="color:#fff;font-size:15px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#2FBFB0;margin-right:6px;"></span>Kreuzfahrt</span>'+
+    '<span style="color:#fff;font-size:15px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#F2714A;margin-right:6px;"></span>Inseln &amp; Strand</span>'+
+    '<span style="color:#fff;font-size:15px;"><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#E8A93C;margin-right:6px;"></span>Europa</span>'+
+    '</div>';
+  el.innerHTML = html;
+}
+
+function renderLocPin(mountId, label, country, coords, flight){
+  var el = document.getElementById(mountId);
+  if(!el) return;
+  el.innerHTML = gridSvg() +
+    '<div class="pin" style="left:50%; top:46%;">'+
+    '<span style="font-family:\'Fraunces\',serif;font-weight:600;font-size:26px;background:rgba(10,45,50,0.85);padding:8px 18px;border-radius:12px;margin-bottom:10px;white-space:nowrap;color:#fff;">'+label+'</span>'+
+    '<span class="dotpin" style="width:30px;height:30px;"></span>'+
+    '</div>'+
+    '<div style="position:absolute;top:18px;left:24px;color:#BFE0DB;font-size:16px;letter-spacing:1px;text-transform:uppercase;">'+country+'</div>'+
+    '<div style="position:absolute;top:18px;right:24px;color:#CFE3DF;font-size:14px;">'+coords+'</div>'+
+    '<div style="position:absolute;bottom:18px;left:24px;right:24px;color:#fff;font-size:17px;background:rgba(10,45,50,0.6);padding:12px 18px;border-radius:12px;">✈️ '+flight+'</div>';
+}
+
+function renderRoute(mountId, ports){
+  var el = document.getElementById(mountId);
+  if(!el) return;
+  var n = ports.length;
+  var pad = 7; /* percent side padding so first/last labels stay inside */
+  var html = '<div style="position:relative;height:100%;width:100%;">';
+  html += '<div style="position:absolute;left:'+pad+'%;right:'+pad+'%;top:50%;height:4px;background:rgba(255,255,255,0.35);transform:translateY(-50%);"></div>';
+  ports.forEach(function(p, i){
+    var left = pad + (i/(n-1))*(100-2*pad);
+    var up = i%2===0;
+    html += '<div style="position:absolute;left:'+left+'%;top:50%;width:22px;height:22px;border-radius:50%;background:#F2714A;border:4px solid rgba(255,255,255,0.95);transform:translate(-50%,-50%);z-index:2;"></div>';
+    var labelTop = up ? 'top:calc(50% - 90px);' : 'top:calc(50% + 24px);';
+    html += '<div style="position:absolute;left:'+left+'%;'+labelTop+'transform:translateX(-50%);color:#fff;font-size:17px;font-weight:700;background:rgba(10,45,50,0.85);padding:8px 16px;border-radius:10px;white-space:nowrap;text-align:center;">'+p+'</div>';
+  });
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderCriteriaCompact(id, mountId){
+  var d = DESTS[id];
+  var el = document.getElementById(mountId);
+  if(!el || !d) return;
+  var html = '';
+  CRIT_KEYS.forEach(function(k){
+    html += '<div class="critcard" style="padding:14px 16px;gap:4px;"><h4 style="font-size:18px;display:flex;justify-content:space-between;align-items:center;">'+CRIT_LABELS[k]+dots(d.ratings[k])+'</h4><p style="font-size:14.5px;line-height:1.3;">'+d.why[k]+'</p></div>';
+  });
+  el.innerHTML = html;
+}
+function renderCostCompact(id, mountId){
+  var d = DESTS[id];
+  var el = document.getElementById(mountId);
+  if(!el || !d) return;
+  var html = '<div style="display:flex;gap:20px;">'+
+    '<div style="flex:1;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px 20px;"><div style="font-size:15px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Studentenbudget</div><div style="font-size:30px;font-weight:800;color:var(--teal-deep);">'+d.price.budget.total+'</div></div>'+
+    '<div style="flex:1;background:var(--teal-deep);border-radius:14px;padding:16px 20px;"><div style="font-size:15px;color:#BFE0DB;text-transform:uppercase;letter-spacing:1px;">Traumvariante</div><div style="font-size:30px;font-weight:800;color:#fff;">'+d.price.traum.total+'</div></div>'+
+    '</div>'+
+    '<div class="spartipp" style="margin-top:14px;font-size:16px;padding:12px 18px;">💡 <div><b>Spartipp:</b> '+d.spartipp+'</div></div>';
+  el.innerHTML = html;
+}
+
+function gridSvg(){
+  var lines='';
+  for(var i=1;i<8;i++){ lines += '<line x1="'+(i*12.5)+'%" y1="0" x2="'+(i*12.5)+'%" y2="100%" stroke="#fff" stroke-width="1"/>'; }
+  for(var j=1;j<6;j++){ lines += '<line x1="0" y1="'+(j*16.6)+'%" x2="100%" y2="'+(j*16.6)+'%" stroke="#fff" stroke-width="1"/>'; }
+  return '<svg preserveAspectRatio="none" aria-label="Breiten- und Längengrad-Raster">'+lines+'</svg>';
+}
+</script>
+
+<script>
+/* ===== Alle dynamischen Inhalte befüllen ===== */
+renderWorldPins('world-pins');
+renderCruiseCompare('cruise-compare-mount');
+
+renderLocPin('med-pin','Venedig','Italien · Startpunkt','45.44° N, 12.32° O','Direktflug Stuttgart/Frankfurt/München – ca. 1,5 Std., kein Umstieg. Zeitverschiebung: +1 Std.');
+renderRoute('med-route', ['Venedig','Dubrovnik','Santorin','Mykonos','Kuşadası','Piräus/Athen']);
+renderCriteriaCompact('med-cruise','crit-med-cruise');
+renderCostCompact('med-cruise','cost-med-cruise');
+
+renderLocPin('carib-pin','Fort Lauderdale','USA · Startpunkt','26.12° N, 80.14° W','Ab Frankfurt direkt ca. 10 Std., ab Stuttgart/München 1 Zubringerflug. Zeitverschiebung: −6 Std.');
+renderRoute('carib-route', ['Fort Lauderdale','Grand Cayman','Cozumel','Jamaika','Half Moon Cay']);
+renderCriteriaCompact('carib-cruise','crit-carib-cruise');
+renderCostCompact('carib-cruise','cost-carib-cruise');
+
+renderLocPin('hawaiicruise-pin','Honolulu','USA · Startpunkt','21.31° N, 157.86° W','Ab Frankfurt via US-Festland ca. 20–22 Std. Gesamtreisezeit, 1 Umstieg. Zeitverschiebung: −12 Std.');
+renderRoute('hawaiicruise-route', ['Honolulu','Kahului (Maui)','Hilo','Kailua-Kona','Nawiliwili (Kauaʻi)']);
+renderCriteriaCompact('hawaii-cruise','crit-hawaii-cruise');
+renderCostCompact('hawaii-cruise','cost-hawaii-cruise');
+
+renderLocPin('maldives-pin','Malé','Malediven','4.17° N, 73.51° O','Ab Frankfurt ca. 10–12 Std. inkl. Umstieg (Istanbul/Dubai/Doha). Zeitverschiebung: +3 Std.');
+renderCriteria('maldives','crit-maldives');
+renderCosts('maldives','cost-budget-maldives','cost-dream-maldives','tip-maldives');
+
+renderLocPin('indonesia-pin','Denpasar (Bali)','Indonesien','8.75° S, 115.17° O','Ab Stuttgart/Frankfurt/München mit 1 Umstieg (Istanbul/Doha) ca. 16–20 Std. Zeitverschiebung: +6 Std.');
+renderRoute('indonesia-route', ['Bali (4 Tage)','Nusa Penida (2 Tage)','Gili/Lombok (4 Tage)','Komodo (3 Tage)']);
+renderCriteria('indonesia','crit-indonesia');
+renderCosts('indonesia','cost-budget-indonesia','cost-dream-indonesia','tip-indonesia');
+
+renderLocPin('hawaiiland-pin','Honolulu','USA · Startpunkt','21.31° N, 157.86° W','Ab Frankfurt via US-Festland ca. 20–26 Std. Gesamtreisezeit. Zeitverschiebung: −12 Std.');
+renderCriteria('hawaii-land','crit-hawaii-land');
+renderCosts('hawaii-land','cost-budget-hawaii-land','cost-dream-hawaii-land','tip-hawaii-land');
+
+renderLocPin('italy-pin','Catania','Italien · Sizilien','37.51° N, 15.08° O','Direktflug ab Stuttgart ca. 2h15, kein Umstieg. Keine Zeitverschiebung.');
+renderRoute('italy-route', ['Catania','Ätna','Taormina','Syrakus','Agrigento','Palermo']);
+renderCriteria('italy','crit-italy');
+renderCosts('italy','cost-budget-italy','cost-dream-italy','tip-italy');
+
+renderLocPin('portugal-pin','Ponta Delgada','Azoren, Portugal','37.74° N, 25.68° W','Ab Frankfurt/München direkt ca. 4h35, ab Stuttgart meist 1 Umstieg. Zeitverschiebung: −2 Std. (Azoren) / −1 Std. (Festland).');
+renderRoute('portugal-route', ['Azoren (São Miguel)','Lissabon & Sintra','Algarve (Lagos/Faro)']);
+renderCriteria('portugal','crit-portugal');
+renderCosts('portugal','cost-budget-portugal','cost-dream-portugal','tip-portugal');
+
+renderBigComparison('big-comparison-mount');
+</script>
+
+</body>
+</html>
