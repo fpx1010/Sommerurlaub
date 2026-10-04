@@ -31,16 +31,62 @@
   a{color:inherit;}
   img{display:block;max-width:100%;}
 
-  #stage{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%, #114A51 0%, #0A2E33 70%);display:flex;align-items:center;justify-content:center;}
+  #stage{position:fixed;inset:0;background:radial-gradient(ellipse at 50% 0%, #114A51 0%, #0A2E33 70%);background-size:160% 160%;display:flex;align-items:center;justify-content:center;animation:bgdrift 36s ease-in-out infinite;overflow:auto;}
   #frame-wrap{position:relative;}
   .slide{
     width:1920px;height:1080px;position:absolute;top:0;left:0;
     background:var(--sand);
-    display:none;
+    display:flex;flex-direction:column;
     overflow:hidden;
     box-shadow:var(--shadow);
+    opacity:0;
+    transform:scale(0.97);
+    pointer-events:none;
+    z-index:1;
+    transition:opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
   }
-  .slide.active{display:flex;flex-direction:column;}
+  .slide.active{opacity:1;transform:scale(1);pointer-events:auto;z-index:2;}
+
+  @keyframes bgdrift{0%{background-position:0% 0%;}50%{background-position:100% 40%;}100%{background-position:0% 0%;}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes kenburns{from{transform:scale(1.12);}to{transform:scale(1);}}
+  @keyframes dotPop{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+  @keyframes pinPulse{0%{transform:scale(0.6);opacity:0.9;}100%{transform:scale(2.6);opacity:0;}}
+
+  .slide.active .pagepad > *{animation:fadeInUp .6s cubic-bezier(.22,1,.36,1) both;}
+  .slide.active .pagepad > *:nth-child(1){animation-delay:.02s;}
+  .slide.active .pagepad > *:nth-child(2){animation-delay:.09s;}
+  .slide.active .pagepad > *:nth-child(3){animation-delay:.16s;}
+  .slide.active .pagepad > *:nth-child(4){animation-delay:.23s;}
+  .slide.active .pagepad > *:nth-child(5){animation-delay:.30s;}
+  .slide.active .imgcard{animation:fadeInUp .55s cubic-bezier(.22,1,.36,1) both;}
+  .slide.active .imgcard:nth-of-type(1){animation-delay:.08s;}
+  .slide.active .imgcard:nth-of-type(2){animation-delay:.15s;}
+  .slide.active .imgcard:nth-of-type(3){animation-delay:.22s;}
+  .slide.active .imgcard:nth-of-type(4){animation-delay:.29s;}
+  .slide.active .imgcard:nth-of-type(5){animation-delay:.36s;}
+  .slide.active .imgcard:nth-of-type(6){animation-delay:.43s;}
+  .slide.active .critcard{animation:fadeInUp .5s cubic-bezier(.22,1,.36,1) both;}
+  .slide.active .critcard:nth-of-type(1){animation-delay:.05s;}
+  .slide.active .critcard:nth-of-type(2){animation-delay:.11s;}
+  .slide.active .critcard:nth-of-type(3){animation-delay:.17s;}
+  .slide.active .critcard:nth-of-type(4){animation-delay:.23s;}
+  .slide.active .critcard:nth-of-type(5){animation-delay:.29s;}
+  .slide.active .critcard:nth-of-type(6){animation-delay:.35s;}
+  .slide.active .critcard:nth-of-type(7){animation-delay:.41s;}
+  .slide.active .critcard:nth-of-type(8){animation-delay:.47s;}
+  .slide.active .costcol{animation:fadeInUp .5s cubic-bezier(.22,1,.36,1) both;animation-delay:.12s;}
+  .slide.active .costcol.dream{animation-delay:.22s;}
+  .slide.active .spartipp{animation:fadeInUp .5s cubic-bezier(.22,1,.36,1) both;animation-delay:.32s;}
+  .slide.active .hero-img{animation:kenburns 16s ease-out both;}
+  .slide.active .ratewrap .dot.on{animation:dotPop .3s cubic-bezier(.34,1.56,.64,1) both;}
+  .slide.active .ratewrap .dot.on:nth-child(1){animation-delay:.05s;}
+  .slide.active .ratewrap .dot.on:nth-child(2){animation-delay:.11s;}
+  .slide.active .ratewrap .dot.on:nth-child(3){animation-delay:.17s;}
+  .slide.active .ratewrap .dot.on:nth-child(4){animation-delay:.23s;}
+  .slide.active .ratewrap .dot.on:nth-child(5){animation-delay:.29s;}
+  .pin-pulse{position:absolute;border-radius:50%;background:inherit;animation:pinPulse 2.2s ease-out infinite;}
 
   /* ---- shared building blocks ---- */
   .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:20px;font-weight:700;color:var(--coral);}
@@ -52,8 +98,9 @@
   .badge.coral{background:var(--coral);}
   .badge.turq{background:var(--turquoise);color:var(--teal-deep);}
 
-  .imgcard{position:relative;border-radius:22px;overflow:hidden;background:#dfe9e8;box-shadow:0 10px 30px -14px rgba(10,50,55,0.4);}
-  .imgcard img{width:100%;height:100%;object-fit:cover;display:block;}
+  .imgcard{position:relative;border-radius:22px;overflow:hidden;background:#dfe9e8;box-shadow:0 10px 30px -14px rgba(10,50,55,0.4);min-height:0;min-width:0;}
+  .imgcard img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1);}
+  .imgcard:hover img{transform:scale(1.07);}
   .imgcard .fallback{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#CFE6E2,#E9DCC2);color:var(--teal-deep);text-align:center;padding:20px;}
   .imgcard .fallback b{font-size:22px;font-family:'Fraunces',serif;}
   .imgcard .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 22px;background:linear-gradient(0deg, rgba(10,40,44,0.82), rgba(10,40,44,0));color:#fff;font-size:20px;font-weight:600;}
@@ -63,7 +110,7 @@
   .dot{width:16px;height:16px;border-radius:50%;background:var(--line);}
   .dot.on{background:var(--coral);}
 
-  .critcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;}
+  .critcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px 24px;display:flex;flex-direction:column;gap:10px;min-height:0;min-width:0;}
   .critcard h4{font-size:24px;color:var(--teal-deep);}
   .critcard p{font-size:18px;line-height:1.4;color:var(--muted);margin:0;}
 
@@ -82,7 +129,8 @@
   .pinmap{position:relative;border-radius:22px;background:radial-gradient(circle at 30% 30%, #1A6A72, #0A353A 75%);overflow:hidden;}
   .pinmap svg{position:absolute;inset:0;width:100%;height:100%;opacity:0.35;}
   .pinmap .pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;}
-  .pinmap .pin .dotpin{width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--coral);transform:rotate(-45deg);box-shadow:0 0 0 6px rgba(242,113,74,0.25);}
+  .pinmap .pin .dotpin{position:relative;width:22px;height:22px;border-radius:50% 50% 50% 0;background:var(--coral);transform:rotate(-45deg);box-shadow:0 0 0 6px rgba(242,113,74,0.25);}
+  .pinmap .pin .dotpin::before{content:'';position:absolute;top:50%;left:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--coral);opacity:0.65;transform:rotate(45deg);animation:pinPulse 2.2s ease-out infinite;}
   .pinmap .label{position:absolute;color:#fff;font-family:'Fraunces',serif;}
 
   table.cmp{border-collapse:collapse;width:100%;}
@@ -95,6 +143,8 @@
   #prevBtn{left:24px;}
   #nextBtn{right:24px;}
   #counter{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);color:#fff;font-size:16px;background:rgba(255,255,255,0.12);padding:8px 18px;border-radius:999px;z-index:50;letter-spacing:1px;}
+  #progressbar{position:fixed;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,0.1);z-index:55;}
+  #progressfill{height:100%;width:0%;background:linear-gradient(90deg,var(--coral),var(--gold));transition:width .5s cubic-bezier(.22,1,.36,1);}
   #menuBtn{position:fixed;top:18px;right:24px;z-index:60;background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:10px 20px;font-size:15px;cursor:pointer;backdrop-filter:blur(6px);}
   #menuPanel{position:fixed;top:0;right:0;height:100%;width:360px;background:#0A2E33;color:#EFE6D4;z-index:70;transform:translateX(100%);transition:transform .3s ease;padding:30px;overflow-y:auto;box-shadow:-20px 0 40px rgba(0,0,0,0.3);}
   #menuPanel.open{transform:translateX(0);}
@@ -122,7 +172,7 @@ function imgFallback(el){
 
 <section class="slide" id="cover" data-menu="① Titel" data-chapter="1">
   <div style="position:absolute;inset:0;">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oia,_Santorini_HDR_sunset.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang in Oia, Santorin" style="width:100%;height:100%;object-fit:cover;">
+    <img class="hero-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Oia,_Santorini_HDR_sunset.jpg?width=1600" onerror="imgFallback(this)" alt="Sonnenuntergang in Oia, Santorin" style="width:100%;height:100%;object-fit:cover;">
     <div class="fallback" style="display:none;position:absolute;inset:0;background:linear-gradient(135deg,#0E5F67,#1C3438);"><b style="color:#fff;font-size:30px;">🌅 Sommer 2027</b></div>
   </div>
   <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(8,30,33,0.90) 8%, rgba(8,30,33,0.15) 50%, rgba(8,30,33,0.45) 100%);"></div>
@@ -177,7 +227,7 @@ function imgFallback(el){
     <div class="eyebrow">Auf einen Blick</div>
     <h2 style="font-size:54px;margin-top:12px;color:var(--teal-deep);">Acht Ziele, eine Weltkarte</h2>
     <div class="pinmap" style="flex:1;margin-top:34px;background:#0A2E33;" id="worldmap-panel">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Equirectangular_projection_SW.jpg" onerror="imgFallback(this)" alt="Weltkarte" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.85;filter:saturate(0.7) brightness(0.8);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Equirectangular_projection_SW.jpg?width=1600" onerror="imgFallback(this)" alt="Weltkarte" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.85;filter:saturate(0.7) brightness(0.8);">
       <div class="fallback" style="display:none;background:linear-gradient(160deg,#114A51,#0A2E33);"></div>
       <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(10,46,51,0.55), rgba(10,46,51,0.25));"></div>
       <div id="world-pins"></div>
@@ -203,7 +253,7 @@ function imgFallback(el){
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Antike Inselwelt &amp; die kürzeste Anreise von allen</h2>
     <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
       <div class="imgcard" style="width:40%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nea_Kameni_and_the_Caldera_of_Santorini.jpg" onerror="imgFallback(this)" alt="Caldera von Santorin">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nea_Kameni_and_the_Caldera_of_Santorini.jpg?width=1600" onerror="imgFallback(this)" alt="Caldera von Santorin">
         <div class="fallback"><b>🌋 Caldera von Santorin</b></div>
         <div class="cap">Die Caldera von Santorin – Startpunkt eurer Route</div>
       </div>
@@ -225,12 +275,12 @@ function imgFallback(el){
     <div class="chaplabel">Kreuzfahrt — Mittelmeer</div>
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights an Bord &amp; an Land</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Black_beach_in_Kamari_Santorini.jpg" onerror="imgFallback(this)" alt="Schwarzer Strand Kamari"><div class="fallback"><b>🏖️ Kamari Beach</b></div><div class="tag">Strand</div><div class="cap">Schwarzer Lavastrand von Kamari, Santorin</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nea_Kameni_and_the_Caldera_of_Santorini.jpg" onerror="imgFallback(this)" alt="Vulkanwanderung Nea Kameni"><div class="fallback"><b>🌋 Nea Kameni</b></div><div class="tag">Abenteuer</div><div class="cap">Vulkanwanderung &amp; heiße Quellen, Nea Kameni</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Celsus_Library_in_Ephesus,_Turkey.jpg" onerror="imgFallback(this)" alt="Celsus-Bibliothek Ephesus"><div class="fallback"><b>🏛️ Ephesus</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Celsus-Bibliothek, Ephesus + türkisches Street Food</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oia,_Santorini_HDR_sunset.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang Oia"><div class="fallback"><b>🌅 Oia Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang in Oia – Postkarten-Panorama</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/City_Walls,_Dubrovnik,_July_2011_(01).jpg" onerror="imgFallback(this)" alt="Stadtmauer Dubrovnik"><div class="fallback"><b>🏰 Dubrovnik</b></div><div class="tag">Kultur</div><div class="cap">2 km Spaziergang auf der Stadtmauer, Dubrovnik</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parthenon_on_Acropolis_in_Athens.jpg" onerror="imgFallback(this)" alt="Akropolis Athen"><div class="fallback"><b>🏛️ Akropolis</b></div><div class="tag">Kultur</div><div class="cap">Parthenon auf der Akropolis, Athen</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Black_beach_in_Kamari_Santorini.jpg?width=1600" onerror="imgFallback(this)" alt="Schwarzer Strand Kamari"><div class="fallback"><b>🏖️ Kamari Beach</b></div><div class="tag">Strand</div><div class="cap">Schwarzer Lavastrand von Kamari, Santorin</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nea_Kameni_and_the_Caldera_of_Santorini.jpg?width=1600" onerror="imgFallback(this)" alt="Vulkanwanderung Nea Kameni"><div class="fallback"><b>🌋 Nea Kameni</b></div><div class="tag">Abenteuer</div><div class="cap">Vulkanwanderung &amp; heiße Quellen, Nea Kameni</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Celsus_Library_in_Ephesus,_Turkey.jpg?width=1600" onerror="imgFallback(this)" alt="Celsus-Bibliothek Ephesus"><div class="fallback"><b>🏛️ Ephesus</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Celsus-Bibliothek, Ephesus + türkisches Street Food</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Oia,_Santorini_HDR_sunset.jpg?width=1600" onerror="imgFallback(this)" alt="Sonnenuntergang Oia"><div class="fallback"><b>🌅 Oia Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang in Oia – Postkarten-Panorama</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/City_Walls,_Dubrovnik,_July_2011_(01).jpg?width=1600" onerror="imgFallback(this)" alt="Stadtmauer Dubrovnik"><div class="fallback"><b>🏰 Dubrovnik</b></div><div class="tag">Kultur</div><div class="cap">2 km Spaziergang auf der Stadtmauer, Dubrovnik</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parthenon_on_Acropolis_in_Athens.jpg?width=1600" onerror="imgFallback(this)" alt="Akropolis Athen"><div class="fallback"><b>🏛️ Akropolis</b></div><div class="tag">Kultur</div><div class="cap">Parthenon auf der Akropolis, Athen</div></div>
     </div>
   </div>
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Mittelmeer · Highlights</span></div>
@@ -246,6 +296,19 @@ function imgFallback(el){
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Mittelmeer · Kriterien &amp; Preise</span></div>
 </section>
 
+<section class="slide" id="med-practical" data-menu="Mittelmeer · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Mittelmeer</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>Frühbucher 9–11 Monate vorher sichern oft 20–30% Rabatt und bessere Kabinenwahl. Kreuzfahrtpreise sind im August am höchsten – die erste Septemberwoche ist spürbar günstiger und ruhiger.</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>Italien, Griechenland, Kroatien: EU/Schengen, Perso reicht. Für den Türkei-Stopp (Kuşadası) ist ein Landgang bei Kreuzfahrten meist ohne gesondertes Visum möglich – vor Abfahrt beim Veranstalter bestätigen lassen.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>Euro in allen Häfen außer der Türkei (Lira, Euro aber vielerorts akzeptiert). EU-Roaming funktioniert in Griechenland/Kroatien ganz normal; für die Türkei lohnt sich evtl. eine Tages-eSIM.</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">Statt der überfüllten Caldera-Aussicht in Oia den Küstenweg Fira–Imerovigli wandern (ca. 1,5 Std.) – gleiches Postkartenpanorama, ein Bruchteil der Touristen.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Mittelmeer · Praktisch</span></div>
+</section>
 
 <section class="slide" id="carib-intro" data-menu="Karibik · Übersicht">
   <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
@@ -253,7 +316,7 @@ function imgFallback(el){
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Postkarten-Karibik – mitten in der Hurrikansaison</h2>
     <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
       <div class="imgcard" style="width:40%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Carnival_Glory,_Half_Moon_Cay,_Bahamas_(5728106364).jpg" onerror="imgFallback(this)" alt="Half Moon Cay">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Carnival_Glory,_Half_Moon_Cay,_Bahamas_(5728106364).jpg?width=1600" onerror="imgFallback(this)" alt="Half Moon Cay">
         <div class="fallback"><b>🏝️ Half Moon Cay</b></div>
         <div class="cap">Half Moon Cay, Bahamas – die private Trauminsel-Station</div>
       </div>
@@ -275,11 +338,11 @@ function imgFallback(el){
     <div class="chaplabel">Kreuzfahrt — Karibik</div>
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights an Bord &amp; an Land</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Carnival_Glory,_Half_Moon_Cay,_Bahamas_(5728106364).jpg" onerror="imgFallback(this)" alt="Half Moon Cay Strand"><div class="fallback"><b>🏖️ Half Moon Cay</b></div><div class="tag">Strand</div><div class="cap">Puderweißer Strand, Half Moon Cay (Bahamas)</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dunn's_River_Falls,_Ocho_Rios,_Jamaica.jpg" onerror="imgFallback(this)" alt="Dunn's River Falls"><div class="fallback"><b>💦 Dunn's River Falls</b></div><div class="tag">Abenteuer</div><div class="cap">Wasserfall-Klettern, Dunn's River Falls (Jamaika)</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Southern_stingrays_at_stingray_city.jpg" onerror="imgFallback(this)" alt="Stingray City"><div class="fallback"><b>🐠 Stingray City</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln mit Stachelrochen, Grand Cayman</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tulum_mayan_ruins_(34070992724).jpg" onerror="imgFallback(this)" alt="Tulum Maya-Ruinen"><div class="fallback"><b>🏛️ Tulum</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Maya-Ruinen von Tulum + mexikanisches Street Food</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ship_and_sunset,_a_perfect_combination.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang an Deck"><div class="fallback"><b>🌅 Deck-Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang an Deck zwischen den Häfen</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Carnival_Glory,_Half_Moon_Cay,_Bahamas_(5728106364).jpg?width=1600" onerror="imgFallback(this)" alt="Half Moon Cay Strand"><div class="fallback"><b>🏖️ Half Moon Cay</b></div><div class="tag">Strand</div><div class="cap">Puderweißer Strand, Half Moon Cay (Bahamas)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Dunn's_River_Falls,_Ocho_Rios,_Jamaica.jpg?width=1600" onerror="imgFallback(this)" alt="Dunn's River Falls"><div class="fallback"><b>💦 Dunn's River Falls</b></div><div class="tag">Abenteuer</div><div class="cap">Wasserfall-Klettern, Dunn's River Falls (Jamaika)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Southern_stingrays_at_stingray_city.jpg?width=1600" onerror="imgFallback(this)" alt="Stingray City"><div class="fallback"><b>🐠 Stingray City</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln mit Stachelrochen, Grand Cayman</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tulum_mayan_ruins_(34070992724).jpg?width=1600" onerror="imgFallback(this)" alt="Tulum Maya-Ruinen"><div class="fallback"><b>🏛️ Tulum</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Maya-Ruinen von Tulum + mexikanisches Street Food</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Ship_and_sunset,_a_perfect_combination.jpg?width=1600" onerror="imgFallback(this)" alt="Sonnenuntergang an Deck"><div class="fallback"><b>🌅 Deck-Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang an Deck zwischen den Häfen</div></div>
       <div class="imgcard" style="background:linear-gradient(135deg,#0E5F67,#1C3438);display:flex;align-items:center;justify-content:center;padding:28px;"><div style="color:#fff;"><b style="font-size:22px;font-family:'Fraunces',serif;">⚠️ Wichtig für Aug/Sep</b><p style="font-size:17px;margin-top:10px;line-height:1.45;color:#CFE3DF;">Statistisches Hurrikan-Maximum: 10. September. Reiseversicherung mit Sturmschutz einplanen (siehe nächste Folie).</p></div></div>
     </div>
   </div>
@@ -296,13 +359,27 @@ function imgFallback(el){
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Karibik · Kriterien &amp; Preise</span></div>
 </section>
 
+<section class="slide" id="carib-practical" data-menu="Karibik · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Karibik</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>ESTA mindestens 72 Std. vor Abflug online beantragen (ca. 21 US$, 2 Jahre gültig). Kabinen 6–9 Monate vorher buchen; Innenkabinen werden oft erst 3–4 Monate vorher stark reduziert.</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>ESTA ist Pflicht, da die Reise in Fort Lauderdale (USA) beginnt. Mexiko, Jamaika und die Cayman Islands sind bei Kreuzfahrt-Tagesstopps meist ohne gesondertes Visum zugänglich.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>US-Dollar ist auf fast allen Stopps die inoffizielle Leitwährung. Englisch überall, in Jamaika teils Patois. Bordinternet ist teuer – für einzelne Landgänge lohnt sich meist keine lokale SIM.</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">In Ocho Rios statt der überlaufenen Dunn's River Falls die ruhigeren Konoko Falls ansteuern – ähnliches Klettererlebnis im Wasserfall, deutlich weniger Kreuzfahrt-Busse.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Karibik · Praktisch</span></div>
+</section>
+
 <section class="slide" id="hawaiicruise-intro" data-menu="Hawaii-Kreuzfahrt · Übersicht">
   <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
     <div class="chaplabel">Kapitel 1 · Kreuzfahrt — Hawaii</div>
     <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Die abenteuerlichste, aber weiteste Variante</h2>
     <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
       <div class="imgcard" style="width:40%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Haleakala_crater.jpg" onerror="imgFallback(this)" alt="Haleakala Krater">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Haleakala_crater.jpg?width=1600" onerror="imgFallback(this)" alt="Haleakala Krater">
         <div class="fallback"><b>🌋 Haleakalā</b></div>
         <div class="cap">Haleakalā-Krater, Maui</div>
       </div>
@@ -324,12 +401,12 @@ function imgFallback(el){
     <div class="chaplabel">Kreuzfahrt — Hawaii</div>
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights an Bord &amp; an Land</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_beach,_Honolulu.jpg" onerror="imgFallback(this)" alt="Waikiki Beach"><div class="fallback"><b>🏖️ Waikiki</b></div><div class="tag">Strand</div><div class="cap">Waikiki Beach, Honolulu</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Haleakala_crater.jpg" onerror="imgFallback(this)" alt="Haleakala Krater"><div class="fallback"><b>🌋 Haleakalā</b></div><div class="tag">Abenteuer</div><div class="cap">Vulkankrater Haleakalā / Kīlauea</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hanauma_Bay_(15551370811).jpg" onerror="imgFallback(this)" alt="Hanauma Bay"><div class="fallback"><b>🐠 Hanauma Bay</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln in der Hanauma Bay, Oahu</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hanawi_Falls_Maui_Hawaii_Road_to_Hana_(31869441038).jpg" onerror="imgFallback(this)" alt="Road to Hana Wasserfall"><div class="fallback"><b>💦 Road to Hana</b></div><div class="tag">Natur</div><div class="cap">Wasserfälle an der Road to Hana, Maui</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Na_Pali_coast_Kauai_2.jpg" onerror="imgFallback(this)" alt="Na Pali Coast"><div class="fallback"><b>🏔️ Nā Pali</b></div><div class="tag">Aussicht</div><div class="cap">Nā Pali Coast, Kauai</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_Beach_at_Sunset.jpg" onerror="imgFallback(this)" alt="Sonnenuntergang Waikiki"><div class="fallback"><b>🌅 Waikiki Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang am Waikiki Beach</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_beach,_Honolulu.jpg?width=1600" onerror="imgFallback(this)" alt="Waikiki Beach"><div class="fallback"><b>🏖️ Waikiki</b></div><div class="tag">Strand</div><div class="cap">Waikiki Beach, Honolulu</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Haleakala_crater.jpg?width=1600" onerror="imgFallback(this)" alt="Haleakala Krater"><div class="fallback"><b>🌋 Haleakalā</b></div><div class="tag">Abenteuer</div><div class="cap">Vulkankrater Haleakalā / Kīlauea</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hanauma_Bay_(15551370811).jpg?width=1600" onerror="imgFallback(this)" alt="Hanauma Bay"><div class="fallback"><b>🐠 Hanauma Bay</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln in der Hanauma Bay, Oahu</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Hanawi_Falls_Maui_Hawaii_Road_to_Hana_(31869441038).jpg?width=1600" onerror="imgFallback(this)" alt="Road to Hana Wasserfall"><div class="fallback"><b>💦 Road to Hana</b></div><div class="tag">Natur</div><div class="cap">Wasserfälle an der Road to Hana, Maui</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Na_Pali_coast_Kauai_2.jpg?width=1600" onerror="imgFallback(this)" alt="Na Pali Coast"><div class="fallback"><b>🏔️ Nā Pali</b></div><div class="tag">Aussicht</div><div class="cap">Nā Pali Coast, Kauai</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_Beach_at_Sunset.jpg?width=1600" onerror="imgFallback(this)" alt="Sonnenuntergang Waikiki"><div class="fallback"><b>🌅 Waikiki Sunset</b></div><div class="tag">Romantik</div><div class="cap">Sonnenuntergang am Waikiki Beach</div></div>
     </div>
   </div>
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii-Kreuzfahrt · Highlights</span></div>
@@ -345,6 +422,20 @@ function imgFallback(el){
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii-Kreuzfahrt · Kriterien &amp; Preise</span></div>
 </section>
 
+<section class="slide" id="hawaiicruise-practical" data-menu="Hawaii-Kreuzfahrt · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Kreuzfahrt — Hawaii</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>Die "Pride of America" ist das einzige reine Hawaii-Rundreiseschiff – Kabinen für August/September sind oft schon 10–12 Monate vorher ausgebucht. Früh buchen ist hier entscheidend.</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>ESTA Pflicht (wie Festland-USA), Reisepass muss noch mindestens 6 Monate gültig sein.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>US-Dollar, Englisch (zusätzlich hawaiianische Beschriftungen). Roaming ist teuer – eine lokale eSIM vorab einrichten (z. B. über Airalo) spart deutlich.</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">Statt der überlaufenen Aussichtsplattform am Haleakalā-Kraterrand den Pipiwai Trail (Road to Hana, Maui) zum Waimoku-Wasserfall wandern – deutlich ruhiger.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii-Kreuzfahrt · Praktisch</span></div>
+</section>
+
 
 <section class="slide" id="maldives-intro" data-menu="⑤ Malediven · Übersicht" data-chapter="1">
   <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
@@ -352,7 +443,7 @@ function imgFallback(el){
     <h2 style="font-size:50px;margin-top:8px;color:var(--teal-deep);">Türkises Wasser, pure Erholung, null Vulkane</h2>
     <div style="display:flex;gap:40px;margin-top:24px;flex:1;min-height:0;">
       <div class="imgcard" style="width:45%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach_Scene_-_Maafushi_Island_-_South_Male_Atoll_-_Maldives_-_01_(14272892886).jpg" onerror="imgFallback(this)" alt="Maafushi Island">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach_Scene_-_Maafushi_Island_-_South_Male_Atoll_-_Maldives_-_01_(14272892886).jpg?width=1600" onerror="imgFallback(this)" alt="Maafushi Island">
         <div class="fallback"><b>🏝️ Maafushi Island</b></div>
         <div class="cap">Maafushi – lokale Insel im Südmalé-Atoll</div>
       </div>
@@ -370,8 +461,8 @@ function imgFallback(el){
     <div class="chaplabel">Malediven</div>
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights im Atoll</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach_Scene_-_Maafushi_Island_-_South_Male_Atoll_-_Maldives_-_01_(14272892886).jpg" onerror="imgFallback(this)" alt="Maafushi Strand"><div class="fallback"><b>🏖️ Maafushi</b></div><div class="tag">Strand</div><div class="cap">Bikini-Strand &amp; Gästehäuser, Maafushi</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Maldives_manta_ray.jpg" onerror="imgFallback(this)" alt="Mantarochen Hanifaru Bay"><div class="fallback"><b>🐋 Hanifaru Bay</b></div><div class="tag">Abenteuer</div><div class="cap">Mantarochen-Schwärme, Hanifaru Bay (Aug–Okt Top-Saison!)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Beach_Scene_-_Maafushi_Island_-_South_Male_Atoll_-_Maldives_-_01_(14272892886).jpg?width=1600" onerror="imgFallback(this)" alt="Maafushi Strand"><div class="fallback"><b>🏖️ Maafushi</b></div><div class="tag">Strand</div><div class="cap">Bikini-Strand &amp; Gästehäuser, Maafushi</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Maldives_manta_ray.jpg?width=1600" onerror="imgFallback(this)" alt="Mantarochen Hanifaru Bay"><div class="fallback"><b>🐋 Hanifaru Bay</b></div><div class="tag">Abenteuer</div><div class="cap">Mantarochen-Schwärme, Hanifaru Bay (Aug–Okt Top-Saison!)</div></div>
       <div class="imgcard" style="background:linear-gradient(135deg,#2FBFB0,#0E5F67);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">🤿</div><b style="font-size:20px;font-family:'Fraunces',serif;">Banana Reef</b><p style="font-size:15px;margin-top:8px;color:#E3F3F0;">Einer der berühmtesten Tauch-/Schnorchelspots der Malediven, Nordmalé-Atoll</p></div></div>
       <div class="imgcard" style="background:linear-gradient(135deg,#F2A66B,#D85C38);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">🧺</div><b style="font-size:20px;font-family:'Fraunces',serif;">Sandbank-Picknick</b><p style="font-size:15px;margin-top:8px;color:#FCEBDD;">Romantisches Picknick auf einer unbewohnten Sandbank, kombiniert mit Schnorcheln</p></div></div>
       <div class="imgcard" style="background:linear-gradient(135deg,#0A454B,#1C3438);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">🍽️</div><b style="font-size:20px;font-family:'Fraunces',serif;">Ithaa Undersea Restaurant</b><p style="font-size:15px;margin-top:8px;color:#CFE3DF;">Weltweit erstes Unterwasser-Restaurant, 5 m unter der Oberfläche (Conrad Maldives)</p></div></div>
@@ -403,6 +494,20 @@ function imgFallback(el){
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Malediven · Preise</span></div>
 </section>
 
+<section class="slide" id="maldives-practical" data-menu="Malediven · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Malediven</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>August/September ist Nebensaison wegen des Südwest-Monsuns – Resort-Preise liegen oft 20–30% unter Dezember/Januar. Frühbucher-Deals gibt es meist 6–8 Monate vorher.</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>Für deutsche Staatsangehörige 30 Tage visumfrei bei Einreise. Reisepass mind. 6 Monate gültig, Rückflugticket und Unterkunftsnachweis bereithalten.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>Rufiyaa ist die Landeswährung, US-Dollar/Euro und Kreditkarte werden aber fast überall akzeptiert. Auf lokalen Inseln (z. B. Maafushi) gilt Alkoholverbot, Bikini nur an ausgewiesenen "Bikini-Beaches".</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">Statt eines teuren Resort-Ausflugs zur Hanifaru Bay eine günstigere geteilte Schnorchel-Tour ab Maafushi buchen – gleiche Chance auf Mantas, Bruchteil des Preises.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Malediven · Praktisch</span></div>
+</section>
+
 
 <section class="slide" id="indonesia-intro" data-menu="⑥ Indonesien · Übersicht" data-chapter="1">
   <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
@@ -410,7 +515,7 @@ function imgFallback(el){
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Vulkane, Drachen &amp; Traumstrände in 14 Tagen</h2>
     <div style="display:flex;gap:40px;margin-top:20px;flex:1;min-height:0;">
       <div class="imgcard" style="width:40%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kelingking_Beach.jpg" onerror="imgFallback(this)" alt="Kelingking Beach">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kelingking_Beach.jpg?width=1600" onerror="imgFallback(this)" alt="Kelingking Beach">
         <div class="fallback"><b>🏝️ Kelingking Beach</b></div>
         <div class="cap">Kelingking Beach, Nusa Penida</div>
       </div>
@@ -432,12 +537,12 @@ function imgFallback(el){
     <div class="chaplabel">Indonesien</div>
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights der Route</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kelingking_Beach.jpg" onerror="imgFallback(this)" alt="Kelingking Beach"><div class="fallback"><b>🏝️ Kelingking</b></div><div class="tag">Strand &amp; Aussicht</div><div class="cap">Kelingking Beach, Nusa Penida – der "T-Rex"-Blick</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Batur_panorama.jpg" onerror="imgFallback(this)" alt="Mount Batur"><div class="fallback"><b>🌋 Mount Batur</b></div><div class="tag">Abenteuer</div><div class="cap">Sonnenaufgangs-Trekking, Mount Batur (1.717 m)</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Komodo_dragon_(Varanus_komodoensis).jpg" onerror="imgFallback(this)" alt="Komodo-Drache"><div class="fallback"><b>🦎 Komodo-Drache</b></div><div class="tag">Abenteuer</div><div class="cap">Komodo-Drachen in freier Wildbahn</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pink_Beach,_Padar_Island,_Komodo_National_Park.jpg" onerror="imgFallback(this)" alt="Pink Beach Padar Island"><div class="fallback"><b>🏖️ Pink Beach</b></div><div class="tag">Strand</div><div class="cap">Pink Beach, Padar Island (Komodo-Nationalpark)</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/1_Tegalalang_rice_terrace_ubud_bali.jpg" onerror="imgFallback(this)" alt="Tegallalang Reisterrassen"><div class="fallback"><b>🌾 Tegallalang</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Reisterrassen &amp; Warungs, Ubud</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Uluwatu_Temple_at_Sunset.jpg" onerror="imgFallback(this)" alt="Uluwatu Tempel Sonnenuntergang"><div class="fallback"><b>🛕 Uluwatu</b></div><div class="tag">Romantik</div><div class="cap">Klifftempel Uluwatu bei Sonnenuntergang + Kecak-Tanz</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Kelingking_Beach.jpg?width=1600" onerror="imgFallback(this)" alt="Kelingking Beach"><div class="fallback"><b>🏝️ Kelingking</b></div><div class="tag">Strand &amp; Aussicht</div><div class="cap">Kelingking Beach, Nusa Penida – der "T-Rex"-Blick</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mount_Batur_panorama.jpg?width=1600" onerror="imgFallback(this)" alt="Mount Batur"><div class="fallback"><b>🌋 Mount Batur</b></div><div class="tag">Abenteuer</div><div class="cap">Sonnenaufgangs-Trekking, Mount Batur (1.717 m)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Komodo_dragon_(Varanus_komodoensis).jpg?width=1600" onerror="imgFallback(this)" alt="Komodo-Drache"><div class="fallback"><b>🦎 Komodo-Drache</b></div><div class="tag">Abenteuer</div><div class="cap">Komodo-Drachen in freier Wildbahn</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pink_Beach,_Padar_Island,_Komodo_National_Park.jpg?width=1600" onerror="imgFallback(this)" alt="Pink Beach Padar Island"><div class="fallback"><b>🏖️ Pink Beach</b></div><div class="tag">Strand</div><div class="cap">Pink Beach, Padar Island (Komodo-Nationalpark)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/1_Tegalalang_rice_terrace_ubud_bali.jpg?width=1600" onerror="imgFallback(this)" alt="Tegallalang Reisterrassen"><div class="fallback"><b>🌾 Tegallalang</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Reisterrassen &amp; Warungs, Ubud</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Uluwatu_Temple_at_Sunset.jpg?width=1600" onerror="imgFallback(this)" alt="Uluwatu Tempel Sonnenuntergang"><div class="fallback"><b>🛕 Uluwatu</b></div><div class="tag">Romantik</div><div class="cap">Klifftempel Uluwatu bei Sonnenuntergang + Kecak-Tanz</div></div>
     </div>
   </div>
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Indonesien · Highlights</span></div>
@@ -465,6 +570,20 @@ function imgFallback(el){
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Indonesien · Preise</span></div>
 </section>
 
+<section class="slide" id="indonesia-practical" data-menu="Indonesien · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Indonesien</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>Komodo-Permits und Bootstouren sind in der Hauptsaison (Juli–September) schnell ausgebucht – 2–3 Monate vorher sichern. Einreisebestimmungen kurz vor Abflug nochmal auf der offiziellen Seite prüfen.</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>E-Visa on Arrival für deutsche Staatsbürger (ca. 35 US$, 30 Tage, online vorab beantragbar). Reisepass muss ab Einreise noch mind. 6 Monate gültig sein.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>Indonesische Rupiah, Bargeld v. a. auf kleineren Inseln empfohlen. Eine lokale SIM-Karte (Telkomsel) ist am Flughafen Denpasar günstig und schnell eingerichtet. Trinkgeld bei Touren üblich, aber nicht verpflichtend.</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">Mount Batur bei Sonnenaufgang ist stark überlaufen (teils 200+ Wanderer) – ruhiger geht's mit einem Nachmittags-Trekking ohne Sonnenaufgangs-Hype oder am benachbarten Mount Abang.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Indonesien · Praktisch</span></div>
+</section>
+
 
 <section class="slide" id="hawaiiland-intro" data-menu="⑦ Hawaii Landurlaub · Übersicht" data-chapter="1">
   <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
@@ -472,7 +591,7 @@ function imgFallback(el){
     <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Inselhopping auf eigene Faust – kein Kreuzfahrtschiff</h2>
     <div style="display:flex;gap:40px;margin-top:18px;flex:1;min-height:0;">
       <div class="imgcard" style="width:38%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NaPaliCoast.jpg" onerror="imgFallback(this)" alt="Na Pali Coast Kauai">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NaPaliCoast.jpg?width=1600" onerror="imgFallback(this)" alt="Na Pali Coast Kauai">
         <div class="fallback"><b>🏔️ Nā Pali Coast</b></div>
         <div class="cap">Nā Pali Coast, Kauaʻi</div>
       </div>
@@ -496,12 +615,12 @@ function imgFallback(el){
     <div class="chaplabel">Hawaii — Landurlaub</div>
     <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Highlights: Oʻahu · Maui · Big Island</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_Beach_(2024)-L1004709.jpg" onerror="imgFallback(this)" alt="Waikiki Beach"><div class="fallback"><b>🏖️ Waikīkī</b></div><div class="tag">Strand</div><div class="cap">Waikīkī Beach, Oʻahu</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/NaPaliCoast.jpg" onerror="imgFallback(this)" alt="Na Pali Coast"><div class="fallback"><b>🏔️ Nā Pali</b></div><div class="tag">Abenteuer</div><div class="cap">Kalalau Trail, Nā Pali Coast (Kauaʻi) – optionale Verlängerung</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Puu_Oo_looking_up_Kilauea_-_edit.jpg" onerror="imgFallback(this)" alt="Kilauea Vulkan"><div class="fallback"><b>🌋 Kīlauea</b></div><div class="tag">Abenteuer</div><div class="cap">Aktiver Vulkan Kīlauea, Big Island</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Molokini_Aerial.jpg" onerror="imgFallback(this)" alt="Molokini Krater"><div class="fallback"><b>🤿 Molokini</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln im Molokini-Krater, Maui</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Luau_Dancer_-_Maui,_Hawaii.jpg" onerror="imgFallback(this)" alt="Lūʻau Tänzerin"><div class="fallback"><b>💃 Lūʻau</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Traditionelles Lūʻau-Fest mit Hula &amp; Kalua-Schwein</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waianapanapa_black_sand_beach_Maui_Hawaii_Road_to_Hana_(43923399650).jpg" onerror="imgFallback(this)" alt="Waianapanapa Lavastrand"><div class="fallback"><b>🌑 Waiʻānapanapa</b></div><div class="tag">Romantik</div><div class="cap">Schwarzer Lavastrand Waiʻānapanapa, Road to Hana</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waikiki_Beach_(2024)-L1004709.jpg?width=1600" onerror="imgFallback(this)" alt="Waikiki Beach"><div class="fallback"><b>🏖️ Waikīkī</b></div><div class="tag">Strand</div><div class="cap">Waikīkī Beach, Oʻahu</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/NaPaliCoast.jpg?width=1600" onerror="imgFallback(this)" alt="Na Pali Coast"><div class="fallback"><b>🏔️ Nā Pali</b></div><div class="tag">Abenteuer</div><div class="cap">Kalalau Trail, Nā Pali Coast (Kauaʻi) – optionale Verlängerung</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Puu_Oo_looking_up_Kilauea_-_edit.jpg?width=1600" onerror="imgFallback(this)" alt="Kilauea Vulkan"><div class="fallback"><b>🌋 Kīlauea</b></div><div class="tag">Abenteuer</div><div class="cap">Aktiver Vulkan Kīlauea, Big Island</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Molokini_Aerial.jpg?width=1600" onerror="imgFallback(this)" alt="Molokini Krater"><div class="fallback"><b>🤿 Molokini</b></div><div class="tag">Abenteuer</div><div class="cap">Schnorcheln im Molokini-Krater, Maui</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Luau_Dancer_-_Maui,_Hawaii.jpg?width=1600" onerror="imgFallback(this)" alt="Lūʻau Tänzerin"><div class="fallback"><b>💃 Lūʻau</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Traditionelles Lūʻau-Fest mit Hula &amp; Kalua-Schwein</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Waianapanapa_black_sand_beach_Maui_Hawaii_Road_to_Hana_(43923399650).jpg?width=1600" onerror="imgFallback(this)" alt="Waianapanapa Lavastrand"><div class="fallback"><b>🌑 Waiʻānapanapa</b></div><div class="tag">Romantik</div><div class="cap">Schwarzer Lavastrand Waiʻānapanapa, Road to Hana</div></div>
     </div>
   </div>
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii Landurlaub · Highlights</span></div>
@@ -529,13 +648,27 @@ function imgFallback(el){
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii Landurlaub · Preise</span></div>
 </section>
 
+<section class="slide" id="hawaiiland-practical" data-menu="Hawaii Landurlaub · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Hawaii — Landurlaub</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>Mietwagen für August/September (US-Sommerferien = Hochsaison) mind. 3–4 Monate vorher reservieren, sonst stark überteuert oder ausgebucht. Inter-Island-Flüge ca. 2–3 Monate vorher günstiger.</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>ESTA Pflicht, Reisepass mind. 6 Monate gültig.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>US-Dollar, Rechtsverkehr wie gewohnt. eSIM vorab einrichten spart Roaming-Kosten. Trinkgeld von 15–20% im Restaurant ist Pflicht-Etikette, kein Extra wie in Deutschland.</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">Statt der Touristenmassen am Waikiki Beach den ruhigeren Lanikai Beach (Oʻahu) oder Hāmoa Beach (Maui) ansteuern – gleiche Postkarten-Optik, kaum Reisebusse.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Hawaii Landurlaub · Praktisch</span></div>
+</section>
+
 <section class="slide" id="italy-intro" data-menu="⑧ Italien (Sizilien) · Übersicht" data-chapter="1">
   <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
     <div class="chaplabel">Kapitel 5 · Italien</div>
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Sizilien: Vulkan, Antike &amp; Direktflug in 2h15</h2>
     <div style="display:flex;gap:40px;margin-top:22px;flex:1;min-height:0;">
       <div class="imgcard" style="width:40%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/DSCF1069-Etna_Volcano-Sicilia-Italy-Castielli_CC0-HQ.jpg" onerror="imgFallback(this)" alt="Ätna Vulkan">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/DSCF1069-Etna_Volcano-Sicilia-Italy-Castielli_CC0-HQ.jpg?width=1600" onerror="imgFallback(this)" alt="Ätna Vulkan">
         <div class="fallback"><b>🌋 Ätna</b></div>
         <div class="cap">Der Ätna – Europas aktivster Vulkan</div>
       </div>
@@ -557,11 +690,11 @@ function imgFallback(el){
     <div class="chaplabel">Italien — Sizilien</div>
     <h2 style="font-size:46px;margin-top:8px;color:var(--teal-deep);">Highlights der Rundreise</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:24px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/DSCF1069-Etna_Volcano-Sicilia-Italy-Castielli_CC0-HQ.jpg" onerror="imgFallback(this)" alt="Ätna Wanderung"><div class="fallback"><b>🌋 Ätna</b></div><div class="tag">Abenteuer</div><div class="cap">Geführte Wanderung auf den Ätna</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Scala_dei_Turchi.jpg" onerror="imgFallback(this)" alt="Scala dei Turchi"><div class="fallback"><b>🏖️ Scala dei Turchi</b></div><div class="tag">Strand</div><div class="cap">Scala dei Turchi, Agrigento</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Taormina-Teatro_Greco01.JPG" onerror="imgFallback(this)" alt="Teatro Greco Taormina"><div class="fallback"><b>🏛️ Teatro Greco</b></div><div class="tag">Romantik &amp; Kultur</div><div class="cap">Antikes Theater Taormina mit Ätna-Blick</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mercato_di_ballar%C3%B2_-_palermo.jpg" onerror="imgFallback(this)" alt="Mercato Ballaro Palermo"><div class="fallback"><b>🍊 Mercato Ballarò</b></div><div class="tag">Essen &amp; Kultur</div><div class="cap">Street Food Markt Ballarò, Palermo</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stromboli_Eruption.jpg" onerror="imgFallback(this)" alt="Stromboli Eruption"><div class="fallback"><b>🌋 Stromboli</b></div><div class="tag">Abenteuer</div><div class="cap">Stromboli bei Nacht – Bootstour zu den Liparischen Inseln</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/DSCF1069-Etna_Volcano-Sicilia-Italy-Castielli_CC0-HQ.jpg?width=1600" onerror="imgFallback(this)" alt="Ätna Wanderung"><div class="fallback"><b>🌋 Ätna</b></div><div class="tag">Abenteuer</div><div class="cap">Geführte Wanderung auf den Ätna</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Scala_dei_Turchi.jpg?width=1600" onerror="imgFallback(this)" alt="Scala dei Turchi"><div class="fallback"><b>🏖️ Scala dei Turchi</b></div><div class="tag">Strand</div><div class="cap">Scala dei Turchi, Agrigento</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Taormina-Teatro_Greco01.JPG?width=1600" onerror="imgFallback(this)" alt="Teatro Greco Taormina"><div class="fallback"><b>🏛️ Teatro Greco</b></div><div class="tag">Romantik &amp; Kultur</div><div class="cap">Antikes Theater Taormina mit Ätna-Blick</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mercato_di_ballar%C3%B2_-_palermo.jpg?width=1600" onerror="imgFallback(this)" alt="Mercato Ballaro Palermo"><div class="fallback"><b>🍊 Mercato Ballarò</b></div><div class="tag">Essen &amp; Kultur</div><div class="cap">Street Food Markt Ballarò, Palermo</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Stromboli_Eruption.jpg?width=1600" onerror="imgFallback(this)" alt="Stromboli Eruption"><div class="fallback"><b>🌋 Stromboli</b></div><div class="tag">Abenteuer</div><div class="cap">Stromboli bei Nacht – Bootstour zu den Liparischen Inseln</div></div>
       <div class="imgcard" style="background:linear-gradient(135deg,#0E5F67,#1C3438);display:flex;align-items:center;justify-content:center;padding:26px;"><div style="color:#fff;text-align:center;"><div style="font-size:40px;">⛱️</div><b style="font-size:20px;font-family:'Fraunces',serif;">Cefalù</b><p style="font-size:15px;margin-top:8px;color:#CFE3DF;">Normannische Kathedrale, Felsen "La Rocca" &amp; feiner Sandstrand</p></div></div>
     </div>
   </div>
@@ -590,13 +723,27 @@ function imgFallback(el){
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Italien · Preise</span></div>
 </section>
 
+<section class="slide" id="italy-practical" data-menu="Italien · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Italien — Sizilien</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>Direktflüge Stuttgart–Catania sind im August sehr gefragt – 4–6 Monate vorher buchen. Unterkünfte an der Küste (Taormina, Cefalù) sind im August oft Wochen im Voraus ausgebucht.</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>EU/Schengen – nur Personalausweis nötig, keine Formalitäten.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>Euro. Englisch in Touristenorten gut, abseits davon hilft etwas Italienisch. Mittagsruhe (13–16 Uhr) vieler Geschäfte einplanen. Trinkgeld freiwillig, aufrunden reicht.</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">Statt der überlaufenen Scala dei Turchi bei Sonnenuntergang den weniger bekannten Strand Eraclea Minoa besuchen – ähnliche weiße Kalksteinklippen, deutlich ruhiger.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Italien · Praktisch</span></div>
+</section>
+
 <section class="slide" id="portugal-intro" data-menu="⑨ Portugal · Übersicht" data-chapter="1">
   <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
     <div class="chaplabel">Kapitel 6 · Portugal</div>
     <h2 style="font-size:42px;margin-top:8px;color:var(--teal-deep);">Azoren + Lissabon + Algarve: Vulkane UND Strand</h2>
     <div style="display:flex;gap:40px;margin-top:18px;flex:1;min-height:0;">
       <div class="imgcard" style="width:38%;">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_das_Sete_Cidades3.jpg" onerror="imgFallback(this)" alt="Sete Cidades Kraterseen">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_das_Sete_Cidades3.jpg?width=1600" onerror="imgFallback(this)" alt="Sete Cidades Kraterseen">
         <div class="fallback"><b>🌋 Sete Cidades</b></div>
         <div class="cap">Kraterseen von Sete Cidades, Azoren</div>
       </div>
@@ -618,12 +765,12 @@ function imgFallback(el){
     <div class="chaplabel">Portugal — Azoren + Lissabon + Algarve</div>
     <h2 style="font-size:44px;margin-top:8px;color:var(--teal-deep);">Highlights der Route</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:24px;flex:1;margin-top:22px;min-height:0;">
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_das_Sete_Cidades3.jpg" onerror="imgFallback(this)" alt="Sete Cidades"><div class="fallback"><b>🌋 Sete Cidades</b></div><div class="tag">Natur &amp; Aussicht</div><div class="cap">Zwei Kraterseen, Sete Cidades (São Miguel)</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parque_Terra_Nostra,_Piscina_de_%C3%A1gua_f%C3%A9rrea,_Furnas,_ilha_de_S%C3%A3o_Miguel,_A%C3%A7ores.JPG" onerror="imgFallback(this)" alt="Terra Nostra Furnas"><div class="fallback"><b>♨️ Terra Nostra</b></div><div class="tag">Abenteuer</div><div class="cap">Baden in vulkanischer Quelle, Furnas</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Whale_(50683933721).jpg" onerror="imgFallback(this)" alt="Wal vor den Azoren"><div class="fallback"><b>🐋 Walbeobachtung</b></div><div class="tag">Abenteuer</div><div class="cap">Walbeobachtung vor São Miguel</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG" onerror="imgFallback(this)" alt="Alfama Lissabon"><div class="fallback"><b>🏘️ Alfama</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Alfama-Viertel, Lissabon – Tram 28 &amp; Fado</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Benagil_Cave_(3).jpg" onerror="imgFallback(this)" alt="Benagil Höhle"><div class="fallback"><b>🕳️ Benagil-Höhle</b></div><div class="tag">Strand</div><div class="cap">Benagil-Höhle, Algarve – per Kajak oder Boot</div></div>
-      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pena_Palace_atop_a_hill_in_the_Sintra_Mountains.jpg" onerror="imgFallback(this)" alt="Pena Palast Sintra"><div class="fallback"><b>🏰 Pena-Palast</b></div><div class="tag">Romantik</div><div class="cap">Märchenschloss Palácio da Pena, Sintra</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lagoa_das_Sete_Cidades3.jpg?width=1600" onerror="imgFallback(this)" alt="Sete Cidades"><div class="fallback"><b>🌋 Sete Cidades</b></div><div class="tag">Natur &amp; Aussicht</div><div class="cap">Zwei Kraterseen, Sete Cidades (São Miguel)</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Parque_Terra_Nostra,_Piscina_de_%C3%A1gua_f%C3%A9rrea,_Furnas,_ilha_de_S%C3%A3o_Miguel,_A%C3%A7ores.JPG?width=1600" onerror="imgFallback(this)" alt="Terra Nostra Furnas"><div class="fallback"><b>♨️ Terra Nostra</b></div><div class="tag">Abenteuer</div><div class="cap">Baden in vulkanischer Quelle, Furnas</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Whale_(50683933721).jpg?width=1600" onerror="imgFallback(this)" alt="Wal vor den Azoren"><div class="fallback"><b>🐋 Walbeobachtung</b></div><div class="tag">Abenteuer</div><div class="cap">Walbeobachtung vor São Miguel</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/View_of_the_Alfama_quarter_in_Lisbon_Portugal.JPG?width=1600" onerror="imgFallback(this)" alt="Alfama Lissabon"><div class="fallback"><b>🏘️ Alfama</b></div><div class="tag">Kultur &amp; Essen</div><div class="cap">Alfama-Viertel, Lissabon – Tram 28 &amp; Fado</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Benagil_Cave_(3).jpg?width=1600" onerror="imgFallback(this)" alt="Benagil Höhle"><div class="fallback"><b>🕳️ Benagil-Höhle</b></div><div class="tag">Strand</div><div class="cap">Benagil-Höhle, Algarve – per Kajak oder Boot</div></div>
+      <div class="imgcard"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pena_Palace_atop_a_hill_in_the_Sintra_Mountains.jpg?width=1600" onerror="imgFallback(this)" alt="Pena Palast Sintra"><div class="fallback"><b>🏰 Pena-Palast</b></div><div class="tag">Romantik</div><div class="cap">Märchenschloss Palácio da Pena, Sintra</div></div>
     </div>
   </div>
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Portugal · Highlights</span></div>
@@ -649,6 +796,20 @@ function imgFallback(el){
     <div class="spartipp" id="tip-portugal" style="margin-top:22px;"></div>
   </div>
   <div class="footerbar"><span>Unser Sommer 2027</span><span>Portugal · Preise</span></div>
+</section>
+
+<section class="slide" id="portugal-practical" data-menu="Portugal · Praktisch">
+  <div class="pagepad" style="flex:1;display:flex;flex-direction:column;">
+    <div class="chaplabel">Portugal</div>
+    <h2 style="font-size:42px;margin-top:6px;margin-bottom:22px;color:var(--teal-deep);">Praktisch, bevor ihr bucht</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);gap:20px;flex:1;min-height:0;">
+      <div class="critcard"><h4>📅 Beste Buchungszeit</h4><p>Direktflüge zu den Azoren (Ponta Delgada) sind limitiert – 6+ Monate vorher buchen, besonders in Kombination mit dem Inlandsflug nach Lissabon. Mietwagen auf den Azoren früh reservieren (kleine Flotte).</p></div>
+      <div class="critcard"><h4>🛂 Einreise &amp; Doku</h4><p>EU/Schengen – Personalausweis reicht.</p></div>
+      <div class="critcard"><h4>💳 Vor Ort</h4><p>Euro. Portugiesisch, aber Englisch in Lissabon/Algarve gut verbreitet, auf den Azoren etwas weniger. Wetter auf den Azoren ist wechselhaft – Regenjacke unabhängig vom Sonnenschein am Flughafen einpacken.</p></div>
+      <div class="critcard" style="background:linear-gradient(165deg,#F2A66B,#D85C38);border:none;"><h4 style="color:#fff;">🤫 Geheimtipp</h4><p style="color:#FCEBDD;">Statt der überlaufenen Praia da Marinha den direkt benachbarten Strand Praia do Carvalho ansteuern (über eine Felsentreppe erreichbar) – fast identische Kulisse, deutlich weniger Besucher.</p></div>
+    </div>
+  </div>
+  <div class="footerbar"><span>Unser Sommer 2027</span><span>Portugal · Praktisch</span></div>
 </section>
 
 
@@ -680,7 +841,7 @@ function imgFallback(el){
 
 <section class="slide" id="closing" data-menu="⑪ Zum Schluss">
   <div style="position:absolute;inset:0;">
-    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Benagil_Cave_(3).jpg" onerror="imgFallback(this)" alt="Benagil Höhle Algarve" style="width:100%;height:100%;object-fit:cover;">
+    <img class="hero-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Benagil_Cave_(3).jpg?width=1600" onerror="imgFallback(this)" alt="Benagil Höhle Algarve" style="width:100%;height:100%;object-fit:cover;">
     <div class="fallback" style="display:none;position:absolute;inset:0;background:linear-gradient(135deg,#0E5F67,#1C3438);"><b style="color:#fff;font-size:30px;">🌊 Euer Sommer 2027</b></div>
   </div>
   <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(8,30,33,0.88) 15%, rgba(8,30,33,0.2) 60%);"></div>
@@ -698,6 +859,7 @@ function imgFallback(el){
 <button class="navbtn" id="prevBtn" aria-label="Zurück">&#8592;</button>
 <button class="navbtn" id="nextBtn" aria-label="Weiter">&#8594;</button>
 <div id="counter">1 / 1</div>
+<div id="progressbar"><div id="progressfill"></div></div>
 <button id="menuBtn">☰ Kapitel</button>
 <div id="menuPanel">
   <button id="closeMenu">✕</button>
@@ -716,15 +878,23 @@ function imgFallback(el){
   var frameWrap = document.getElementById('frame-wrap');
   var stage = document.getElementById('stage');
   function fit(){
-    var sw = window.innerWidth, sh = window.innerHeight;
-    var scale = Math.min(sw/1920, sh/1080) * 0.96;
+    var vv = window.visualViewport;
+    var sw = (vv && vv.width) || window.innerWidth;
+    var sh = (vv && vv.height) || window.innerHeight;
+    var scale = Math.min(sw/1920, sh/1080) * 0.94;
     frameWrap.style.width = 1920*scale + 'px';
     frameWrap.style.height = 1080*scale + 'px';
     frameWrap.style.transform = 'scale('+scale+')';
     frameWrap.style.transformOrigin = 'top left';
   }
   window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', function(){ setTimeout(fit, 150); });
+  if(window.visualViewport){
+    window.visualViewport.addEventListener('resize', fit);
+    window.visualViewport.addEventListener('scroll', fit);
+  }
   fit();
+  setTimeout(fit, 300); /* re-measure once mobile browser chrome has settled */
 
   var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   var idx = 0;
@@ -735,6 +905,7 @@ function imgFallback(el){
     idx = i;
     slides[idx].classList.add('active');
     document.getElementById('counter').textContent = (idx+1)+' / '+slides.length;
+    document.getElementById('progressfill').style.width = ((idx+1)/slides.length*100)+'%';
     window.scrollTo(0,0);
   }
   document.getElementById('nextBtn').addEventListener('click', function(){show(idx+1);});
@@ -1022,7 +1193,7 @@ function renderWorldPins(mountId){
     else if(p.x > 90){ hShift='-100%'; }
     var vOffset = p.dir==='down' ? (p.y+2.2) : (p.y-2.2);
     var vTransform = p.dir==='down' ? 'translate('+hShift+',0%)' : 'translate('+hShift+',-100%)';
-    html += '<div style="position:absolute;left:'+p.x+'%;top:'+p.y+'%;width:20px;height:20px;transform:translate(-50%,-50%);border-radius:50%;background:'+colors[p.group]+';box-shadow:0 0 0 6px '+colors[p.group]+'40,0 2px 6px rgba(0,0,0,0.4);z-index:2;"></div>';
+    html += '<div style="position:absolute;left:'+p.x+'%;top:'+p.y+'%;width:20px;height:20px;transform:translate(-50%,-50%);z-index:2;"><span class="pin-pulse" style="inset:0;background:'+colors[p.group]+';"></span><span style="position:absolute;inset:0;border-radius:50%;background:'+colors[p.group]+';box-shadow:0 0 0 6px '+colors[p.group]+'40,0 2px 6px rgba(0,0,0,0.4);"></span></div>';
     html += '<div style="position:absolute;left:'+p.x+'%;top:'+vOffset+'%;transform:'+vTransform+';font-family:\'Inter\',sans-serif;font-weight:700;font-size:16px;color:#fff;background:rgba(8,38,42,0.92);padding:5px 12px;border-radius:8px;white-space:nowrap;z-index:3;">'+p.name+'</div>';
   });
   html += '<div style="position:absolute;bottom:24px;left:24px;display:flex;gap:22px;">'+
